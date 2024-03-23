@@ -28,6 +28,7 @@ RUN . "$NVM_DIR/nvm.sh" && \
     nvm use default
 
 # Install npm
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y npm
 
 # Install Yarn
