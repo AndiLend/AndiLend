@@ -27,6 +27,17 @@ RUN . "$NVM_DIR/nvm.sh" && \
     nvm alias default 20 && \
     nvm use default
 
+# Install npm
+RUN apt-get update && \
+    apt-get install -y npm
+
+# Install Yarn
+RUN curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarn-archive-keyring.gpg >/dev/null && \
+    echo "deb [signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && \
+    apt-get install -y yarn
+
+
     # source ~/.bashrc
 
 # ENV IS_USING_DOCKER=true
