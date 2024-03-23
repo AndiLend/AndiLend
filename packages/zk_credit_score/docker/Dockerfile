@@ -15,8 +15,18 @@ RUN mkdir -p /root/.nargo/bin && \
 curl -o /root/.nargo/bin/nargo-x86_64-unknown-linux-gnu.tar.gz -L https://github.com/noir-lang/noir/releases/download/v0.22.0/nargo-x86_64-unknown-linux-gnu.tar.gz && \
 tar -xvf /root/.nargo/bin/nargo-x86_64-unknown-linux-gnu.tar.gz -C /root/.nargo/bin/
 ENV PATH="/root/.nargo/bin:${PATH}"
-
 RUN apt update && apt install -y git
+
+# installs NVM (Node Version Manager)
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+ENV NVM_DIR="/root/.nvm"
+RUN [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+RUN [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  
+RUN . "$NVM_DIR/nvm.sh" && \
+    nvm install 20 && \
+    nvm alias default 20 && \
+    nvm use default
+
     # source ~/.bashrc
 
 # ENV IS_USING_DOCKER=true
