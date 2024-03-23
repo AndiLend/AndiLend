@@ -1,11 +1,12 @@
-fn main(x: Field, y: pub Field) {
-    assert(x != y);
-}
+use dep::std::ecdsa_secp256k1::verify_signature;
+use dep::std;
+use dep::std::scalar_mul;
+use dep::std::hash;
 
-#[test]
-fn test_main() {
-    main(1, 2);
-
-    // Uncomment to make test fail
-    // main(1, 1);
+fn main(index : Field,
+  leafLeft: Field,
+  leafRight: Field
+) {
+    let root = std::merkle::compute_merkle_root(leafLeft, index, [leafRight]);
+    std::println(root);
 }
