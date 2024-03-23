@@ -15,6 +15,8 @@ RUN mkdir -p /root/.nargo/bin && \
 curl -o /root/.nargo/bin/nargo-x86_64-unknown-linux-gnu.tar.gz -L https://github.com/noir-lang/noir/releases/download/v0.22.0/nargo-x86_64-unknown-linux-gnu.tar.gz && \
 tar -xvf /root/.nargo/bin/nargo-x86_64-unknown-linux-gnu.tar.gz -C /root/.nargo/bin/
 ENV PATH="/root/.nargo/bin:${PATH}"
+
+RUN apt update && apt install -y git
     # source ~/.bashrc
 
 # ENV IS_USING_DOCKER=true
