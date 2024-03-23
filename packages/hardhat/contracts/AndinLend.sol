@@ -3,12 +3,13 @@ pragma solidity >=0.8.0 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract AndiLend {
+contract AndinLend {
 	struct Loan {
 		uint amount;
 		uint loanTime;
+    uint fee;
 		uint8 interest;
-		uint8 feesAmount;
+		uint8 pendingFeesAmount;
 		uint8 status;
 	}
 
@@ -32,19 +33,21 @@ contract AndiLend {
 		uint _amount,
 		uint _loanTime,
 		uint8 _interest,
-		uint8 _feesAmount
+		uint8 _pendingFeesAmount
 	) external {
+    uint memory fee = div(_amount, _pendingFeesAmount);
 		Loan newLoanRequest = Loan(
 			_amount,
+      fee,
 			_loanTime,
 			_interest,
-			_feesAmount,
+			_pendingFeesAmount,
 			0
 		);
 		loans[msg.sender] = newLoanRequest;
 	}
 
-	function grantLoan(address _borrower) public {
+	function grantLoan(address memory _borrower) public {
 		require(
 			loans[_borrower],
 			"The client does not have a loan requirement"
@@ -69,4 +72,39 @@ contract AndiLend {
     stake = add(stake, _amount);
 
   }
+
+  function payFee() external {
+    require(loans[msg.sender], 'Client does not have an active loan');
+    require(loans[msg.sender].status == 1, 'The loan is not active');
+    // To Do review quantity
+
+    erc20USDT.transferFrom(msg.sender, address(this), loans[msg.sender].fee);
+    stake = add(stake, _loans[msg.sender].fee)
+    loans[msg.sender].pendingFeesAmount = sub(loans[msg.sender].pendingFeesAmount, 1);
+    if(loans[msg.sender].pendingFeesAmount == 0){
+      finishLoan();
+    }
+  }
+
+  function finishLoan() private {
+    loans[msg.sender].status = 2;
+    // To Do Add extra logic
+  }
+
+  function withdrawLend (uint _amount) external {
+    require(lends[msg.sender], 'Lender not found');
+    require(lends[msg.sender].amount <= _amount, 'The amount is bigger than what the lender has had lend.');
+    require(_amount <= stake, 'Not enough fund to withdraw.');
+
+		erc20USDT.transfer(msg.sender, _amount);
+		stake = sub(stake, _amount);
+  }
+
+	function getLoanByAddres(address _borrower) public returns(Loan){
+		return loans[_borrower];
+	}
+
+	function getLendByAddres(address _lender) public returns(Lend){
+		return lends[_lender];
+	}
 }
