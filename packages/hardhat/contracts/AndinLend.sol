@@ -6,43 +6,48 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract AndinLend {
 	struct Loan {
 		uint amount;
+		uint balanceDue;
 		uint loanTime;
     uint fee;
 		uint8 interest;
-		uint8 pendingFeesAmount;
+		uint8 creditScore;
+		uint8 pendingFeesCount;
 		uint8 status;
+		bytes proof;
 	}
 
-	struct Lend {
-		uint amount;
-		uint8 interest;
-	}
-
-	mapping(address => Loan) private loans;
-	mapping(address => Lend) private lends;
+	mapping(address => Loan) public loans;
+	mapping(address => address) private borrowerToLender;
+	mapping(address => address[]) private lenderToBorrowers;
 
 	IERC20 private erc20USDT;
-	// mapping(IERC20 => uint) private stake;
-	uint private stake;
+	// Verifier private verifier
 
-	constructor(address _erc20USDTAddress) {
+	constructor(address _erc20USDTAddress, address _verifier) {
 		erc20USDT = IERC20(_erc20USDTAddress);
+		verifier = Verifer(_verifier);
 	}
 
 	function requestLoan(
 		uint _amount,
 		uint _loanTime,
 		uint8 _interest,
-		uint8 _pendingFeesAmount
+		uint8 _pendingFeesCount,
+		uint8 _creditScore,
+		bytes _proof
 	) external {
-    uint memory fee = div(_amount, _pendingFeesAmount);
+		uint memory weeks = div(_loanTime, 604800);
+		uint memory balanceDue = add(mul(mul(div(_interest, 100), weeks), _amount), _amount);
+    uint memory fee = div(_balanceDue, _pendingFeesCount);
 		Loan newLoanRequest = Loan(
 			_amount,
       fee,
 			_loanTime,
 			_interest,
-			_pendingFeesAmount,
-			0
+			_creditScore
+			_pendingFeesCount,
+			uint8(0),
+			_proof
 		);
 		loans[msg.sender] = newLoanRequest;
 	}
@@ -53,33 +58,20 @@ contract AndinLend {
 			"The client does not have a loan requirement"
 		);
 		require(loans[_borrower].status == 0, "The loan is not pending");
-		require(loans[_borrower].amount <= stake, "Not enough founds to loan");
 
+		// To Do verify how to transfer from one to another.
+		erc20USDT.transferFrom(msg.sender, _borrower, loans[_borrower].amount);
 		loans[_borrower].status = 1;
-		erc20USDT.transfer(_borrower, loans[_borrower].amount);
-		stake = sub(stake, loans[_borrower].amount);
+		borrowerToLender[_borrower] = msg.sender;
+		lenderToBorrowers[msg.sender].push(_borrower);
 	}
 
-  function lend(uint _amount) external {
-    require(_amount > 0, 'A positive amount is required');
-    // To Do review if sender has enough tokens.
-    // To Do review if sender has a previous lend.
-
-    Lend newLend = Lend(_amount, 14);
-    lends[msg.sender] = newLend
-
-    erc20USDT.transferFrom(msg.sender, address(this), _amount);
-    stake = add(stake, _amount);
-
-  }
-
-  function payFee() external {
+  function payFee(address _lender) external {
     require(loans[msg.sender], 'Client does not have an active loan');
     require(loans[msg.sender].status == 1, 'The loan is not active');
     // To Do review quantity
 
-    erc20USDT.transferFrom(msg.sender, address(this), loans[msg.sender].fee);
-    stake = add(stake, _loans[msg.sender].fee)
+    erc20USDT.transferFrom(msg.sender, _lender, loans[msg.sender].fee);
     loans[msg.sender].pendingFeesAmount = sub(loans[msg.sender].pendingFeesAmount, 1);
     if(loans[msg.sender].pendingFeesAmount == 0){
       finishLoan();
@@ -88,23 +80,21 @@ contract AndinLend {
 
   function finishLoan() private {
     loans[msg.sender].status = 2;
-    // To Do Add extra logic
   }
 
-  function withdrawLend (uint _amount) external {
-    require(lends[msg.sender], 'Lender not found');
-    require(lends[msg.sender].amount <= _amount, 'The amount is bigger than what the lender has had lend.');
-    require(_amount <= stake, 'Not enough fund to withdraw.');
-
-		erc20USDT.transfer(msg.sender, _amount);
-		stake = sub(stake, _amount);
-  }
-
-	function getLoanByAddres(address _borrower) public returns(Loan){
+	function getLoanByAddress(address _borrower) public view returns(Loan){
 		return loans[_borrower];
 	}
 
-	function getLendByAddres(address _lender) public returns(Lend){
-		return lends[_lender];
+	function getLoansByLend(address _lender) external view returns(Loan[]){
+		Loan[] memory loansByLend;
+		address[] memory borrowers = lenderToBorrowers[_lender];
+
+		for(uint i = 0; i < borrowers.length; i++){
+			address borrower = borrowers[i];
+			loansByLend.push(loans[borrower]);
+		}
+
+		return loansByLend;
 	}
 }
