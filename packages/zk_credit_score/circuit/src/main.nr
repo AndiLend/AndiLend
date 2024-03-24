@@ -2,7 +2,7 @@ use dep::std::ecdsa_secp256k1::verify_signature;
 use dep::std;
 use dep::std::scalar_mul;
 use dep::std::hash;
-// use dep::ecrecover;
+use dep::ecrecover;
 
 
 fn split_address_credit_score(
@@ -30,17 +30,85 @@ fn split_address_credit_score(
     (credit_score, address)
 }
 
+fn get_number_from_utf8_code(code: u8) -> u8 {
+    // assert(code >= 48 & code <= 57);
+    code - 48
+}
+
 
 fn main(
   index: Field,
   leaf: Field,
   root: pub Field,
-  // pub_key_x: [u8; 32],
-  // pub_key_y: [u8; 32],
-  // qualification: pub Field,
-  hash_path: [Field; 1]
+//   pub_key_x: [u8; 32],
+//   pub_key_y: [u8; 32],
+  qualification: pub Field,
+  hash_path: [Field; 3]
 ) {
 
+    // std::println(index);
+    // std::println(leaf);
+    // std::println(root);
+
+    // let mut leaf_array: [u8; 64] = [0; 64];
+    // for i in 0..64 {
+    //     leaf_array[i] = leaf_bytes[i]; 
+    // }
+    // std::println(leaf_array);
+
+
+    std::println(leaf);
+    let leaf_bytes = leaf.to_be_bytes(64);
+    let mut credit_score_bytes: [u8; 3] = [0; 3];
+    let mut address_bytes: [u8; 64] = [0; 64];
+
+    for i in 0..20 {
+        address_bytes[63 -i ] = leaf_bytes[leaf_bytes.len() -1 - i];
+    }
+    for i in 0..3 {
+        credit_score_bytes[2 - i] = leaf_bytes[leaf_bytes.len() -21 - i];
+    }
+    let address_recovered = ecrecover::secp256k1::PubKey::from_unified(address_bytes);
+
+    std::println(credit_score_bytes);
+    std::println(address_bytes);
+    std::println(address_recovered);
+    std::println(address_recovered.to_eth_address());
+
+    let credit_score: u32 = 900;
+    let expected_qualification = if credit_score >= 800 {
+        2
+    } else if credit_score >= 500 {
+        1
+    } else {
+        0
+    };
+    assert (expected_qualification == qualification);
+
+    // TODO: this wont work because the address_byte is supposed to be a 64 bytes address
+    // and we have a 20bytes address into a 64 bytes array....
+
+
+    // // let number: u32 = u32::from_be_bytes( credit_score_bytes);
+    // let first_CS_digit = get_number_from_utf8_code(credit_score_bytes[0]);
+    // let second_CS_digit = get_number_from_utf8_code(credit_score_bytes[1]);
+    // let third_CS_digit = get_number_from_utf8_code(credit_score_bytes[2]);
+    // let credit_score_number: u32 = first_CS_digit as u32 * 100 + second_CS_digit as u32 *10 + third_CS_digit as u32;
+
+    // std::println(credit_score_number);
+    
+    // ler number: u64 = credit_score_bytes as u64;
+
+    // std::println(number);
+    // let public_address = ecrecover::secp256k1::PubKey::from_unified(address_bytes);
+    // std::println(public_address.to_be_bytes(64));
+    // public_address.to_be_bytes(64);
+    // assert (address_recovered == public_address);
+
+
+
+    // // let leaf_array = leaf.to_le_bytes(64);
+    // let (_credit_score, _address) = split_address_credit_score(leaf_bytes);
     
 
     // Check if the leaf is part of the merkle tree
@@ -84,14 +152,7 @@ fn main(
     // let credit_score = u64::from_str_radix(credit_score_hex, 16).unwrap();
     
     // First let's check that the calification is true
-    // let credit_score = 900;
-    // let expected_qualification = if credit_score >= 800 {
-    //     2
-    // } else if credit_score >= 500 {
-    //     1
-    // } else {
-    //     0
-    // };
+    
 
     // // assert (expected_qualification == qualification);
     

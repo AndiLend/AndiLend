@@ -127,8 +127,9 @@ const exec = util.promisify(require('child_process').exec);
 function getCircuitContent(hashPath, index, leaf, root) {
     return `hash_path = [${hashPath.map(hash => `"${hash}"`+'\n')}]
 index = "${index}"
-leaf = "${leaf}"
-root = "${root}"
+leaf = "${leaf}" 
+qualification = "2"
+root = "${root}" 
 `;
 }
 
