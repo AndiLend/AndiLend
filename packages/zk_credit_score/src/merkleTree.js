@@ -38,7 +38,7 @@ async function generateRoot(leafLeft, leafRight){
     const { stdout, stderr } = await exec('cd nargo && nargo prove');
     console.log("🚀 ~ generateRoot ~ stderr:", stderr)
     console.log("🚀 ~ generateRoot ~ stdout:", stdout)
-    return stdout
+    return stdout.trim();
 
 }
 
@@ -77,27 +77,27 @@ function createEmptyJsonLeaf(){
 
 
 // Function to push a new leaf to the Merkle tree JSON file
-function pushLeafToMerkleTree(address, creditScore, filePath) {
-    let merkleTree = [];
+function pushLeaf(address, creditScore, filePath) {
+    let leafJson = [];
 
     // Check if the file exists
     if (fs.existsSync(filePath)) {
         // Read the existing Merkle tree JSON file
-        merkleTree = JSON.parse(fs.readFileSync(filePath));
+        leafJson = JSON.parse(fs.readFileSync(filePath));
     }
 
     // Push the new leaf to the Merkle tree
-    merkleTree.push({
+    leafJson.push({
         address: address,
         creditScore: creditScore,
         leafValue: createLeaf(address, creditScore)
     });
 
     // Write the updated Merkle tree JSON back to the file
-    fs.writeFileSync(filePath, JSON.stringify(merkleTree, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(leafJson, null, 2));
 
     console.log('New leaf added to Merkle tree JSON:', {address, creditScore });
-    console.log("new merkleTree.json:", merkleTree)
+    console.log("new leafJson.json:", leafJson)
 }
 
 // Function to calculate the smallest power of 2 greater than or equal to a given number
@@ -114,17 +114,20 @@ const exec = util.promisify(require('child_process').exec);
 
 
 // Function to calculate the Merkle root
-async function calculateMerkleRoot(merkleTreeJson) {
+async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
      // Calculate the number of nodes required to make the tree complete
-     const completeSize = nextPowerOfTwo(merkleTreeJson.length);
-     console.log("🚀 ~ calculateMerkleRoot ~ completeSize:", completeSize)
+     const completeSize = nextPowerOfTwo(leafsJson.length);
+     console.log("🚀 ~ calculateMerkleTreeAndRoot ~ completeSize:", completeSize)
 
      // If the number of nodes is not a power of 2, add empty leaf nodes
-     const numEmptyLeaves = completeSize - merkleTreeJson.length;
-     console.log("🚀 ~ calculateMerkleRoot ~ numEmptyLeaves:", numEmptyLeaves)
+     const numEmptyLeaves = completeSize - leafsJson.length;
+     console.log("🚀 ~ calculateMerkleTreeAndRoot ~ numEmptyLeaves:", numEmptyLeaves)
      for (let i = 0; i < numEmptyLeaves; i++) {
-        merkleTreeJson.push(createEmptyJsonLeaf());
+        leafsJson.push(createEmptyJsonLeaf());
      }
+
+    let merkleTree = [leafsJson]
+    console.log("🚀 ~ calculateMerkleTreeAndRoot ~ merkleTree:", merkleTree)
 
     // Helper function to recursively calculate the Merkle root
     async function recursiveHash(nodes) {
@@ -132,7 +135,16 @@ async function calculateMerkleRoot(merkleTreeJson) {
         
         // Base case: If only one node is left, return its hash
         if (nodes.length === 1) {
-            return nodes[0]
+            console.log("finishhh")
+            let returnJson= {
+                merkleTree,
+                root:nodes[0].leafValue
+            }
+            fs.writeFileSync(merkleTreePath, JSON.stringify(returnJson, null, 2));
+            console.log("🚀 ~ recursiveHash ~ returnJson:", returnJson)
+            const hashPath = calculateHashPath(leafsJson.length -1 , merkleTree)
+            console.log("🚀 ~ recursiveHash ~ hashPath:", hashPath)
+            return returnJson
         }
 
         // Recursive case: Hash pairs of nodes and concatenate the hashes
@@ -151,13 +163,41 @@ async function calculateMerkleRoot(merkleTreeJson) {
             newNodes.push({leafValue});
         }
         // Recur with the new set of nodes
+        merkleTree.push(newNodes)
         return recursiveHash(newNodes);
     }
 
     // Start the recursion with the sorted Merkle tree data
-    const recursiveReturn = await recursiveHash(merkleTreeJson).leafValue;
+    const recursiveReturn = await recursiveHash(leafsJson).leafValue;
     console.log("root:", recursiveReturn)
     return recursiveReturn;
+}
+
+function calculateHashPath(leafIndex, merkleTree) {
+    console.log("🚀 ~ calculateHashPath ~ merkleTree:", merkleTree)
+    console.log("🚀 ~ calculateHashPath ~ leafIndex:", leafIndex)
+    const hashPath = [];
+
+    // Start from the bottom layer (leaves)
+    let layerIndex = 0;
+    let currentIndex = leafIndex;
+
+    // Iterate through the layers until we reach the root
+    while (layerIndex < merkleTree.length - 1) {
+        const currentLayer = merkleTree[layerIndex];
+        const currentSiblingIndex = (currentIndex % 2 === 0) ? currentIndex + 1 : currentIndex - 1;
+        const siblingLeaf = currentLayer[currentSiblingIndex];
+        console.log("🚀 ~ calculateHashPath ~ siblingLeaf:", siblingLeaf)
+
+        // Add the sibling's leafValue to the hash path
+        hashPath.push(siblingLeaf.leafValue);
+
+        // Move to the parent layer
+        currentIndex = Math.floor(currentIndex / 2);
+        layerIndex++;
+    }
+
+    return hashPath;
 }
 
 
@@ -166,7 +206,7 @@ module.exports = {
     generateZeroProverToml,
     generateRoot,
     createLeaf,
-    pushLeafToMerkleTree,
+    pushLeaf,
     createEmptyLeaf,
-    calculateMerkleRoot
+    calculateMerkleTreeAndRoot
 }
