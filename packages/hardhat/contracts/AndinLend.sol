@@ -57,8 +57,8 @@ contract AndinLend {
 		Loan memory newLoanRequest = Loan(
 			_amount,
 			balanceDue,
-			fee,
 			_loanTime,
+			fee,
 			_interest,
 			_creditScore,
 			_pendingFeesCount,
@@ -78,6 +78,11 @@ contract AndinLend {
 		require(
 			erc20USDT.balanceOf(msg.sender) > loans[_borrower].amount,
 			"Insufficient USDT balance."
+		);
+		require(
+			erc20USDT.allowance(msg.sender, address(this)) >=
+				loans[_borrower].amount,
+			"Insufficient USDT balance allowance."
 		);
 
 		erc20USDT.transferFrom(msg.sender, _borrower, loans[_borrower].amount);
@@ -102,7 +107,6 @@ contract AndinLend {
 			"The address is not the lender of this loan."
 		);
 
-		erc20USDT.approve(msg.sender, loans[msg.sender].fee);
 		erc20USDT.transferFrom(msg.sender, _lender, loans[msg.sender].fee);
 		loans[msg.sender].pendingFeesCount =
 			loans[msg.sender].pendingFeesCount -
@@ -122,6 +126,12 @@ contract AndinLend {
 		address _borrower
 	) external view returns (Loan memory) {
 		return loans[_borrower];
+	}
+
+	function getLenderByBorrowerAddress(
+		address _borrower
+	) external view returns (address) {
+		return borrowerToLender[_borrower];
 	}
 
 	function getLoansByLend(

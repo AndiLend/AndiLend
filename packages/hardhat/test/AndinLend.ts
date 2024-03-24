@@ -54,13 +54,48 @@ describe("AndinLend", function () {
     it("Should grant loan", async function () {
       const andinLendAccount2 = andinLend.connect(account2);
 
-      const loanAccount1 = await andinLend.getLoanByAddress(await account1.getAddress());
+      let loanAccount1 = await andinLend.getLoanByAddress(await account1.getAddress());
       await usdtMock.connect(account2).approve(await andinLend.getAddress(), loanAccount1[0]);
       await andinLendAccount2.grantLoan(await account1.getAddress());
       const balanceAccount1 = await usdtMock.balanceOf(await account1.getAddress());
       const balanceAccount2 = await usdtMock.balanceOf(await account2.getAddress());
       expect(balanceAccount1).to.be.equal(150000000n);
       expect(balanceAccount2).to.be.equal(150000000n);
+      loanAccount1 = await andinLend.getLoanByAddress(await account1.getAddress());
+      expect(loanAccount1[7]).to.be.equal(1n);
+    });
+
+    it("Should pay fee", async function () {
+      const andinLendAccount1 = andinLend.connect(account1);
+      const addressAccount1 = await account1.getAddress();
+
+      let loanAccount1 = await andinLend.getLoanByAddress(addressAccount1);
+      await usdtMock.connect(account1).approve(await andinLend.getAddress(), loanAccount1[3]);
+      const addressLender = await andinLendAccount1.getLenderByBorrowerAddress(addressAccount1);
+      await andinLendAccount1.payFee(addressLender);
+      const balanceAccount1 = await usdtMock.balanceOf(addressAccount1);
+      const balanceAccount2 = await usdtMock.balanceOf(addressLender);
+      expect(balanceAccount1).to.be.equal(118000000n);
+      expect(balanceAccount2).to.be.equal(182000000n);
+      loanAccount1 = await andinLend.getLoanByAddress(addressAccount1);
+      expect(loanAccount1[6]).to.be.equal(1n);
+    });
+
+    it("Should pay fee and finish the loan", async function () {
+      const andinLendAccount1 = andinLend.connect(account1);
+      const addressAccount1 = await account1.getAddress();
+
+      let loanAccount1 = await andinLend.getLoanByAddress(addressAccount1);
+      await usdtMock.connect(account1).approve(await andinLend.getAddress(), loanAccount1[3]);
+      const addressLender = await andinLendAccount1.getLenderByBorrowerAddress(addressAccount1);
+      await andinLendAccount1.payFee(addressLender);
+      const balanceAccount1 = await usdtMock.balanceOf(addressAccount1);
+      const balanceAccount2 = await usdtMock.balanceOf(addressLender);
+      expect(balanceAccount1).to.be.equal(86000000n);
+      expect(balanceAccount2).to.be.equal(214000000n);
+      loanAccount1 = await andinLend.getLoanByAddress(addressAccount1);
+      expect(loanAccount1[6]).to.be.equal(0n);
+      expect(loanAccount1[7]).to.be.equal(2n);
     });
   });
 });
