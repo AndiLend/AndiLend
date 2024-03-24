@@ -2,29 +2,29 @@
   "merkleTree": [
     [
       {
-        "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-        "creditScore": 139,
-        "leafValue": "0x0000000000000000000001397a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+        "address": "0x0000000000000000000000000000000000000000",
+        "creditScore": 0,
+        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
       },
       {
-        "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-        "creditScore": 196,
-        "leafValue": "0x0000000000000000000001967a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+        "address": "0x0000000000000000000000000000000000000000",
+        "creditScore": 0,
+        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
       },
       {
-        "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-        "creditScore": 154,
-        "leafValue": "0x0000000000000000000001547a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+        "address": "0x0000000000000000000000000000000000000000",
+        "creditScore": 0,
+        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
       },
       {
-        "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-        "creditScore": 19,
-        "leafValue": "0x0000000000000000000000197a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+        "address": "0x0000000000000000000000000000000000000000",
+        "creditScore": 0,
+        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
       },
       {
-        "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-        "creditScore": 430,
-        "leafValue": "0x0000000000000000000004307a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+        "address": "0x0000000000000000000000000000000000000000",
+        "creditScore": 0,
+        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
       },
       {
         "address": "0x0000000000000000000000000000000000000000",
@@ -44,13 +44,13 @@
     ],
     [
       {
-        "leafValue": "0x2fd4938d789a33c46811c246e02b2d75b1273e4a0b3710481db702b99a5c649e"
+        "leafValue": "0x27b1d0839a5b23baf12a8d195b18ac288fcf401afb2f70b8a4b529ede5fa9fed"
       },
       {
-        "leafValue": "0x11fc6d3830ec960cc5a830c84b40fc35132154281402995cb1dc9ed6e66826f7"
+        "leafValue": "0x27b1d0839a5b23baf12a8d195b18ac288fcf401afb2f70b8a4b529ede5fa9fed"
       },
       {
-        "leafValue": "0x14ed4e00d1c28d8aa92d44ab4e20eb1a2dce26139ed10f0d26a00dfd380c3a69"
+        "leafValue": "0x27b1d0839a5b23baf12a8d195b18ac288fcf401afb2f70b8a4b529ede5fa9fed"
       },
       {
         "leafValue": "0x27b1d0839a5b23baf12a8d195b18ac288fcf401afb2f70b8a4b529ede5fa9fed"
@@ -58,17 +58,17 @@
     ],
     [
       {
-        "leafValue": "0x227352703319337ee5776fe8f3220260fe2affda294a92f8a43c3761461c8439"
+        "leafValue": "0x21dbfd1d029bf447152fcf89e355c334610d1632436ba170f738107266a71550"
       },
       {
-        "leafValue": "0x14208e23152e25a6a3447e55b6428c37fb72e20d0a1ec8a1a858ada6de82c23c"
+        "leafValue": "0x21dbfd1d029bf447152fcf89e355c334610d1632436ba170f738107266a71550"
       }
     ],
     [
       {
-        "leafValue": "0x20e655405195fbefb09d78230bba44e09f5bc4d9235c01ea194ca05560a7438a"
+        "leafValue": "0x0bcd1f91cf7bdd471d0a30c58c4706f3fdab3807a954b8f5b5e3bfec87d001bb"
       }
     ]
   ],
-  "root": "0x20e655405195fbefb09d78230bba44e09f5bc4d9235c01ea194ca05560a7438a"
+  "root": "0x0bcd1f91cf7bdd471d0a30c58c4706f3fdab3807a954b8f5b5e3bfec87d001bb"
 }
