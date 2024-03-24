@@ -6,7 +6,7 @@ const page = () => {
   return (
     <>
       {/* {/* <ClientDashboard /> */}
-      {/* <InvestorDashboard params={""} /> */}
+      {/* <InvestorDashboard /> */}
     </>
   );
 };

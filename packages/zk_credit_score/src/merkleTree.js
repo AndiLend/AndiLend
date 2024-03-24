@@ -136,20 +136,16 @@ root = "${root}"
 // Function to calculate the Merkle root
 async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
      const lastPushedIndex = leafsJson.length -1;
-     console.log("🚀 ~ calculateMerkleTreeAndRoot ~ leafsJson:", leafsJson)
      // Calculate the number of nodes required to make the tree complete
      const completeSize = nextPowerOfTwo(leafsJson.length);
-     console.log("🚀 ~ calculateMerkleTreeAndRoot ~ completeSize:", completeSize)
 
      // If the number of nodes is not a power of 2, add empty leaf nodes
      const numEmptyLeaves = completeSize - leafsJson.length;
-     console.log("🚀 ~ calculateMerkleTreeAndRoot ~ numEmptyLeaves:", numEmptyLeaves)
      for (let i = 0; i < numEmptyLeaves; i++) {
         leafsJson.push(createEmptyJsonLeaf());
      }
 
     let merkleTree = [leafsJson]
-    console.log("🚀 ~ calculateMerkleTreeAndRoot ~ merkleTree:", merkleTree)
 
     // Helper function to recursively calculate the Merkle root
     async function recursiveHash(nodes) {
@@ -167,13 +163,14 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
             console.log('hashPath => ', hashPath);
             const circuitContent = getCircuitContent(hashPath, lastPushedIndex, leafsJson[lastPushedIndex].leafValue, nodes[0].leafValue);
             await writeToFileSync('circuit/Prover.toml', circuitContent);
-            executeCommand('cd circuit && nargo prove');
+            console.log(" 🥑🥑🥑🥑🥑🥑🥑🥑🥑 Now we are going to create the ZK Proof!! 🥑🥑🥑🥑🥑🥑🥑🥑🥑")
+            executeCommand('cd circuit && nargo prove --silence-warnings');
             const proof = readFirstLineOfFile('circuit/proofs/nargo_credit_score.proof');
             console.log({proof});
             console.log("🚀 ~ recursiveHash ~ hashPath:", hashPath);
 
             fs.writeFileSync('/workspace/hashPath.json', JSON.stringify(hashPath, null, 2));
-            return [returnJson, proof]
+            return {returnJson, proof}
         }
 
         // Recursive case: Hash pairs of nodes and concatenate the hashes
@@ -199,7 +196,7 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
     }
 
     // Start the recursion with the sorted Merkle tree data
-    const recursiveReturn = await recursiveHash(leafsJson)[0].leafValue;
+    const recursiveReturn = await recursiveHash(leafsJson).proof;
     console.log("root:", recursiveReturn)
     return recursiveReturn;
 }
@@ -215,11 +212,8 @@ function calculateHashPath(leafIndex, merkleTree) {
     // Iterate through the layers until we reach the root
     while (layerIndex < merkleTree.length - 1) {
         const currentLayer = merkleTree[layerIndex];
-        console.log("🚀 ~ calculateHashPath ~ currentLayer:", currentLayer)
         const currentSiblingIndex = (currentIndex % 2 === 0) ? currentIndex + 1 : currentIndex - 1;
-        console.log("🚀 ~ calculateHashPath ~ currentSiblingIndex:", currentSiblingIndex)
         const siblingLeaf = currentLayer[currentSiblingIndex];
-        console.log("🚀 ~ calculateHashPath ~ siblingLeaf:", siblingLeaf)
 
 
         // Add the sibling's leafValue to the hash path
