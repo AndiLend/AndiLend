@@ -1,11 +1,12 @@
 import React from "react";
-import { InvestorDashboard } from "~~/components/DashboardBase";
+
+// import { InvestorDashboard } from "~~/components/DashboardBase";
 
 const page = () => {
   return (
     <>
       {/* {/* <ClientDashboard /> */}
-      <InvestorDashboard />
+      {/* <InvestorDashboard /> */}
     </>
   );
 };
