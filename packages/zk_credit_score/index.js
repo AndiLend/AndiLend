@@ -1,5 +1,6 @@
 const express = require('express');
-const { calculateMerkleTreeAndRoot } = require('./src/merkleTree.js');
+const fs = require('fs');
+const { calculateMerkleTreeAndRoot, pushLeaf } = require('./src/merkleTree.js');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const leafsFilePath = "/workspace/leafs.json"
