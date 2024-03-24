@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { execSync } = require("child_process");
 
 function generateProverToml(leafLeft, leafRight, cb) {
     // Construct the Prover.toml content
@@ -32,9 +33,14 @@ async function generateRoot(leafLeft, leafRight){
         });
       });
     
-    const { stdout, stderr } = await exec('cd nargo_merkle_tree && nargo prove');
-    return stdout.trim();
-
+    let result;
+    try {
+        result = execSync('cd nargo_merkle_tree && nargo prove');
+    } catch(e) {
+        console.log('nargo prove error!!! ', e);
+    }
+    console.log('result => ', result);
+    return result.toString().trim();
 }
 
 function createLeaf(address, creditScore) {
