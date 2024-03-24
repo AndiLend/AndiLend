@@ -8,7 +8,6 @@ const Quests = () => {
   return (
     <div className="main">
       <HeaderPage title="¡Welcome, Pedro.eth!" description="Receive funds for your projects, filling out the form" />
-      {/* <BodyPage></BodyPage> */}
       <div className="container">
         <div className="flex-auto w-64 right ">
           <FoundingForm />

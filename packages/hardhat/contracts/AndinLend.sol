@@ -35,12 +35,8 @@ contract AndinLend {
 
 	IERC20 private erc20USDT;
 
-	// Verifier private verifier
-
 	constructor(address _erc20USDTAddress) {
-		//, address _verifier) {
 		erc20USDT = IERC20(_erc20USDTAddress);
-		// verifier = Verifer(_verifier);
 	}
 
 	function requestLoan(
@@ -51,6 +47,10 @@ contract AndinLend {
 		uint8 _creditScore,
 		bytes memory _proof
 	) external {
+		require(
+			loans[msg.sender].loanTime == 0 || loans[msg.sender].status == 2,
+			"Each user can only have one active loan."
+		);
 		uint dueWeeks = _loanTime / 604800;
 		uint balanceDue = ((_interest * dueWeeks * _amount) / 100) + _amount;
 		uint fee = balanceDue / _pendingFeesCount;
