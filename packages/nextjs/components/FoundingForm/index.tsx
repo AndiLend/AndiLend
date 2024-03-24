@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { IntegerInput } from "../scaffold-eth";
 import "./FoundingForm.css";
-import { useAccount } from "wagmi";
+import { useAccount, useConfig } from "wagmi";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 
 const contractName = "AndinLend";
@@ -11,7 +11,10 @@ const FoundingForm = () => {
   const [amount, setAmount] = useState<string | bigint>("");
   const [time, setTime] = useState("");
   const { address } = useAccount();
-  const { writeContractAsync, isPending } = useScaffoldWriteContract(contractName);
+  const config = useConfig();
+  const { writeContractAsync, isPending } = useScaffoldWriteContract(contractName, {
+    config: config,
+  });
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTime(event.target.value);
@@ -31,7 +34,7 @@ const FoundingForm = () => {
         functionName: "requestLoan",
         args: [amountFinal, loanTime, interest, pendingFeesCount, creditScore, proof],
         account: address,
-      });
+      } as never);
       setAmount("");
       setTime("");
     }

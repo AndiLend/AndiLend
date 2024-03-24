@@ -5,9 +5,9 @@
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
 const deployedContracts = {
-  31337: {
+  534351: {
     AndinLend: {
-      address: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      address: "0xd0fB3F0440eef72547fB0cfd4082D248ab8dc86f",
       abi: [
         {
           inputs: [
@@ -578,8 +578,6 @@ const deployedContracts = {
       ],
       inheritedFunctions: {},
     },
-  },
-  534351: {
     USDTMock: {
       address: "0x8afcC5e06999f2969bEC06Bce6877797AFDaeE19",
       abi: [
