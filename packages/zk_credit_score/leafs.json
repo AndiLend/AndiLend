@@ -1,22 +1,52 @@
 [
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 889,
-    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000889"
+    "creditScore": 554,
+    "leafValue": "0x0000000000000000000005547a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 815,
-    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000815"
+    "creditScore": 587,
+    "leafValue": "0x0000000000000000000005877a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 830,
-    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000830"
+    "creditScore": 391,
+    "leafValue": "0x0000000000000000000003917a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 681,
-    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000681"
+    "creditScore": 853,
+    "leafValue": "0x0000000000000000000008537a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 969,
+    "leafValue": "0x0000000000000000000009697a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 941,
+    "leafValue": "0x0000000000000000000009417a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 706,
+    "leafValue": "0x0000000000000000000007067a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 382,
+    "leafValue": "0x0000000000000000000003827a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 72,
+    "leafValue": "0x0000000000000000000000727a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 14,
+    "leafValue": "0x0000000000000000000000147a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
   }
 ]

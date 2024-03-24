@@ -2,14 +2,11 @@ const fs = require("fs");
 
 function generateProverToml(leafLeft, leafRight, cb) {
     // Construct the Prover.toml content
-    const tomlContent = `[index]
-value = "0"
+    const tomlContent = `index = "0"
 
-[leafLeft]
-value = "${leafLeft.leafValue}"
+leafLeft = "${leafLeft.leafValue}"
 
-[leafRight]
-value = "${leafRight.leafValue}"
+leafRight = "${leafRight.leafValue}"
 `;
 
     return tomlContent;
@@ -22,9 +19,12 @@ function generateZeroProverToml(){
 }
 
 async function generateRoot(leafLeft, leafRight){
+    console.log("🚀 ~ generateRoot ~ leafRight:", leafRight)
+    console.log("🚀 ~ generateRoot ~ leafLeft:", leafLeft)
     const proverContent = generateProverToml(leafLeft, leafRight);
-    const p = new Promise((resolve, reject) => {
-        fs.writeFileSync('nargo/Prover.toml', proverContent, function (err) {
+    console.log("🚀 ~ generateRoot ~ proverContent:", proverContent)
+    await new Promise((resolve, reject) => {
+        fs.writeFile('nargo/Prover.toml', proverContent, function (err) {
             if (err) {
                 console.error('Error writing to Prover.toml:', err);
                 reject();
@@ -34,7 +34,7 @@ async function generateRoot(leafLeft, leafRight){
             resolve();    
         });
       });
-    await p;
+    
     const { stdout, stderr } = await exec('cd nargo && nargo prove');
     console.log("🚀 ~ generateRoot ~ stderr:", stderr)
     console.log("🚀 ~ generateRoot ~ stdout:", stdout)
@@ -53,7 +53,7 @@ function createLeaf(address, creditScore) {
     const paddedAddress = cleanAddress.padEnd(40, '0');
 
     // Concatenate the padded address and padded credit score to form the leaf value
-    const leafValue = `0x${paddedAddress}${hexCreditScore}`;
+    const leafValue = `0x${hexCreditScore}${paddedAddress}`;
 
     return leafValue;
 }
@@ -115,6 +115,7 @@ const exec = util.promisify(require('child_process').exec);
 
 // Function to calculate the Merkle root
 async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
+     console.log("🚀 ~ calculateMerkleTreeAndRoot ~ leafsJson:", leafsJson)
      // Calculate the number of nodes required to make the tree complete
      const completeSize = nextPowerOfTwo(leafsJson.length);
      console.log("🚀 ~ calculateMerkleTreeAndRoot ~ completeSize:", completeSize)
@@ -152,6 +153,7 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
         for (let i = 0; i < nodes.length; i += 2) {
             const left = nodes[i];
             const right = nodes[i + 1];
+             console.log("🚀 ~ recursiveHash ~ right:", right)
              // Execute the CLI command asynchronously and wait for the result
              const leafValue = await generateRoot(left, right);
 
