@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { execSync } = require("child_process");
 
 function generateProverToml(leafLeft, leafRight, cb) {
     // Construct the Prover.toml content
@@ -35,10 +36,14 @@ async function generateRoot(leafLeft, leafRight){
         });
       });
     
-    const { stdout, stderr } = await exec('cd nargo && nargo prove');
-    console.log("🚀 ~ generateRoot ~ stderr:", stderr)
-    console.log("🚀 ~ generateRoot ~ stdout:", stdout)
-    return stdout.trim();
+    let result;
+    try {
+        result = execSync('cd nargo && nargo prove');
+    } catch(e) {
+        console.log('nargo prove error!!! ', e);
+    }
+    console.log('result => ', result);
+    return result.toString().trim();
 
 }
 
