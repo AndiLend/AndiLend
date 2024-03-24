@@ -109,6 +109,7 @@ const exec = util.promisify(require('child_process').exec);
 
 // Function to calculate the Merkle root
 async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
+     const lastPushedIndex = leafsJson.length -1;
      console.log("🚀 ~ calculateMerkleTreeAndRoot ~ leafsJson:", leafsJson)
      // Calculate the number of nodes required to make the tree complete
      const completeSize = nextPowerOfTwo(leafsJson.length);
@@ -136,7 +137,7 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
             }
             fs.writeFileSync(merkleTreePath, JSON.stringify(returnJson, null, 2));
 
-            const hashPath = calculateHashPath(leafsJson.length -1 , merkleTree)
+            const hashPath = calculateHashPath(lastPushedIndex , merkleTree)
             console.log("🚀 ~ recursiveHash ~ hashPath:", hashPath)
 
             fs.writeFileSync('/workspace/hashPath.json', JSON.stringify(hashPath, null, 2));
@@ -177,12 +178,16 @@ function calculateHashPath(leafIndex, merkleTree) {
     // Start from the bottom layer (leaves)
     let layerIndex = 0;
     let currentIndex = leafIndex;
+    console.log("🚀 ~ calculateHashPath ~ currentIndex:", currentIndex)
 
     // Iterate through the layers until we reach the root
     while (layerIndex < merkleTree.length - 1) {
         const currentLayer = merkleTree[layerIndex];
+        console.log("🚀 ~ calculateHashPath ~ currentLayer:", currentLayer)
         const currentSiblingIndex = (currentIndex % 2 === 0) ? currentIndex + 1 : currentIndex - 1;
+        console.log("🚀 ~ calculateHashPath ~ currentSiblingIndex:", currentSiblingIndex)
         const siblingLeaf = currentLayer[currentSiblingIndex];
+        console.log("🚀 ~ calculateHashPath ~ siblingLeaf:", siblingLeaf)
 
 
         // Add the sibling's leafValue to the hash path
