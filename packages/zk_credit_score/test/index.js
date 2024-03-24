@@ -79,10 +79,12 @@ exec(command, (error, stdout, stderr) => {
 
   console.log(`stdout: ${stdout}`);
 
+});
+
 
     // Example usage
-    let address = "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC";
-    let creditScore = 800;
+let address = "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC";
+let creditScore = 800;
 
     let leaf = createLeaf(address, creditScore);
     console.log(leaf); // Output the merged leaf value
@@ -105,4 +107,43 @@ exec(command, (error, stdout, stderr) => {
     console.log(leaf); // Output the merged leaf value
 
 
-});
+
+
+import fs from 'fs';
+
+// Function to push a new leaf to the Merkle tree JSON file
+function pushLeafToMerkleTree(address, creditScore, filePath) {
+    let merkleTree = [];
+
+    // Check if the file exists
+    if (fs.existsSync(filePath)) {
+        // Read the existing Merkle tree JSON file
+        merkleTree = JSON.parse(fs.readFileSync(filePath));
+    }
+
+    // Push the new leaf to the Merkle tree
+    merkleTree.push({
+        address: address,
+        creditScore: creditScore
+    });
+
+    // Write the updated Merkle tree JSON back to the file
+    fs.writeFileSync(filePath, JSON.stringify(merkleTree, null, 2));
+
+    console.log('New leaf added to Merkle tree JSON:', {address, creditScore });
+    console.log("new merkleTree.json:", merkleTree)
+}
+
+// Example usage
+address = "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC";
+creditScore = 800;
+let filePath = "/workspace/merkleTree.json"
+
+pushLeafToMerkleTree(address, creditScore, filePath);
+
+address = "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC";
+creditScore = 900;
+filePath = "/workspace/merkleTree.json"
+
+pushLeafToMerkleTree(address, creditScore, filePath);
+pushLeafToMerkleTree(address, creditScore, filePath);
