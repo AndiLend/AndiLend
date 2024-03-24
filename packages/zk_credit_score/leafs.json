@@ -1,52 +1,32 @@
 [
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 554,
-    "leafValue": "0x0000000000000000000005547a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+    "creditScore": 916,
+    "leafValue": "0x0000000000000000000009167a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 587,
-    "leafValue": "0x0000000000000000000005877a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+    "creditScore": 517,
+    "leafValue": "0x0000000000000000000005177a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 391,
-    "leafValue": "0x0000000000000000000003917a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+    "creditScore": 465,
+    "leafValue": "0x0000000000000000000004657a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 853,
-    "leafValue": "0x0000000000000000000008537a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+    "creditScore": 214,
+    "leafValue": "0x0000000000000000000002147a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 969,
-    "leafValue": "0x0000000000000000000009697a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+    "creditScore": 100,
+    "leafValue": "0x0000000000000000000001007a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 941,
-    "leafValue": "0x0000000000000000000009417a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 706,
-    "leafValue": "0x0000000000000000000007067a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 382,
-    "leafValue": "0x0000000000000000000003827a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 72,
-    "leafValue": "0x0000000000000000000000727a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 14,
-    "leafValue": "0x0000000000000000000000147a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
+    "creditScore": 773,
+    "leafValue": "0x0000000000000000000007737a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC"
   }
 ]
