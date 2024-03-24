@@ -31,16 +31,27 @@ async function writeToFileSync(filePath, content) {
       });
 }
 
+function executeCommand(command) {
+    let result;
+    try {
+        result = execSync(command);
+    } catch(e) {
+        console.log('command execution error!!! ', e);
+    }
+    return result;
+}
+
+function readFirstLineOfFile(filePath) {
+    const data = fs.readFileSync(filePath, 'utf8');
+    const lines = data.split('\n');
+    const firstLine = lines[0];
+    return firstLine;
+}
+
 async function generateRoot(leafLeft, leafRight){
     const proverContent = generateProverToml(leafLeft, leafRight);
     await writeToFileSync('nargo_merkle_tree/Prover.toml', proverContent);
-    
-    let result;
-    try {
-        result = execSync('cd nargo_merkle_tree && nargo prove');
-    } catch(e) {
-        console.log('nargo prove error!!! ', e);
-    }
+    const result = executeCommand('cd nargo_merkle_tree && nargo prove');
     return result.toString().trim();
 }
 
@@ -155,6 +166,9 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
             console.log('hashPath => ', hashPath);
             const circuitContent = getCircuitContent(hashPath, lastPushedIndex, leafsJson[lastPushedIndex].leafValue, nodes[0].leafValue);
             await writeToFileSync('circuit/Prover.toml', circuitContent);
+            executeCommand('cd circuit && nargo prove');
+            const proof = readFirstLineOfFile('circuit/proofs/nargo_credit_score.proof');
+            console.log({proof});
             console.log("🚀 ~ recursiveHash ~ hashPath:", hashPath);
 
             fs.writeFileSync('/workspace/hashPath.json', JSON.stringify(hashPath, null, 2));
