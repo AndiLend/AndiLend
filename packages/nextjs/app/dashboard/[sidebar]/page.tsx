@@ -1,11 +1,11 @@
-import { UserDashboard } from "~~/components/DashboardBase";
+import { InvestorDashboard } from "~~/components/DashboardBase";
 
 const page = ({ params }: { params: string }) => {
   return (
-    <>
-      {/* <InvestorDashboard /> */}
-      <UserDashboard params={params} />
-    </>
+    <div>
+      <InvestorDashboard params={params} />
+      {/* <UserDashboard params={params} /> */}
+    </div>
   );
 };
 

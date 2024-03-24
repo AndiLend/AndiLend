@@ -2,7 +2,6 @@ import React from "react";
 import HeaderPage from "../Global/HeaderPage";
 import "./Payments.css";
 
-// components/LoanTable.js
 const LoanTable = () => {
   return (
     <div className="overflow-hidden ring-1 ring-white ring-opacity-5 md:rounded-lg w-full">
