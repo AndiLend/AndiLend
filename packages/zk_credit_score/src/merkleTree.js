@@ -47,6 +47,12 @@ function createLeaf(address, creditScore) {
     return leafValue;
 }
 
+function createEmptyLeaf(){
+    const address ="0x0000000000000000000000000000000000000000";
+    const creditScore = 0;
+    return createLeaf(address, creditScore);
+}
+
 // Function to push a new leaf to the Merkle tree JSON file
 function pushLeafToMerkleTree(address, creditScore, filePath) {
     let merkleTree = [];
@@ -70,10 +76,46 @@ function pushLeafToMerkleTree(address, creditScore, filePath) {
     console.log("new merkleTree.json:", merkleTree)
 }
 
+
+// Function to calculate the Merkle root
+function calculateMerkleRoot(merkleTreeJson) {
+    // If the number of nodes is odd, add an empty leaf node
+    if (merkleTreeJson.length % 2 !== 0) {
+        merkleTreeJson.push(createEmptyLeaf);
+    }
+
+    // Helper function to recursively calculate the Merkle root
+    function recursiveHash(nodes) {
+        // Base case: If only one node is left, return its hash
+        if (nodes.length === 1) {
+            return nodes[nodes.lengt -1]
+        }
+
+        // Recursive case: Hash pairs of nodes and concatenate the hashes
+        const newNodes = [];
+        for (let i = 0; i < nodes.length; i += 2) {
+            const left = nodes[i];
+            const right = nodes[i + 1];
+            const hash = left+right
+            newNodes.push(hash);
+        }
+        
+        console.log("🚀 ~ recursiveHash ~ newNodes:", newNodes)
+        // Recur with the new set of nodes
+        return recursiveHash(newNodes);
+    }
+
+    // Start the recursion with the sorted Merkle tree data
+    return recursiveHash(merkleTreeJson);
+}
+
+
 module.exports = {
     generateProverToml,
     generateZeroProverToml,
     generateRoot,
     createLeaf,
-    pushLeafToMerkleTree
+    pushLeafToMerkleTree,
+    createEmptyLeaf,
+    calculateMerkleRoot
 }
