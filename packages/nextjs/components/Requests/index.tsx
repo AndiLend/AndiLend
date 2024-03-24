@@ -4,7 +4,9 @@ import React from "react";
 import HeaderPage from "../Global/HeaderPage";
 import "./Requests.css";
 import { Address } from "viem";
-import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
+import { useAccount, useConfig } from "wagmi";
+import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { CONTRACT_ADDRESS } from "~~/utils/scaffold-eth/constants";
 
 type Loan = {
   amount: bigint;
@@ -19,8 +21,32 @@ type Loan = {
 };
 
 type loansType = readonly Loan[] | undefined;
+const contractName = "AndinLend";
 
 const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Address[] }) => {
+  const config = useConfig();
+  const { address: userAddress } = useAccount();
+  const { writeContractAsync, isPending } = useScaffoldWriteContract(contractName, {
+    config: config,
+  });
+
+  const { writeContractAsync: writeContractAsyncERC20, isPending: isPendingERC20 } = useScaffoldWriteContract(
+    "USDTMock",
+    { config },
+  );
+  const onApprove = async (loan: Loan, address: Address) => {
+    await writeContractAsyncERC20({
+      functionName: "approve",
+      args: [CONTRACT_ADDRESS, loan.amount],
+      account: userAddress,
+    } as never);
+    await writeContractAsync({
+      functionName: "grantLoan",
+      args: [address],
+      account: userAddress,
+    } as never);
+  };
+
   return (
     <div className="overflow-hidden ring-1 ring-white ring-opacity-5 md:rounded-lg w-full">
       <table className="min-w-full divide-y divide-gray-300">
@@ -67,7 +93,13 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan.interest}%</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{Number(loan.loanTime)} months</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                  <button className="bg-[#7B61E4] text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg">
+                  <button
+                    className="bg-[#7B61E4] text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg"
+                    onClick={() => {
+                      onApprove(loan, addresses[id]);
+                    }}
+                    disabled={isPending || isPendingERC20}
+                  >
                     Approve
                   </button>
                 </td>
@@ -80,7 +112,6 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
   );
 };
 
-const contractName = "AndinLend";
 const Requests = () => {
   const { data } = useScaffoldReadContract({
     contractName,
