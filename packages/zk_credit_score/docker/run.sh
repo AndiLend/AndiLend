@@ -28,6 +28,7 @@ docker run --volume ${currentDir}:/workspace \
            --name ${containerName} \
            --interactive \
            --workdir="/workspace" \
+           --publish 3000:3000 \
            --tty \
            --detach \
            --publish-all \

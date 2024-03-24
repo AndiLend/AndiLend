@@ -1,6 +1,11 @@
 node_modules
 */.env
 */node_modules
+hashPath.json
+merkleTree.json
+*/Prover.toml
+*/proofs/*
+
 # dependencies, yarn, etc
 # yarn / eslint
 .yarn/*

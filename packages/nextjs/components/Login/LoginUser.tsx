@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { RainbowKitCustomConnectButton } from "../scaffold-eth";
 import "./LoginUser.css";
 
 const LoginUser = () => {
@@ -17,7 +18,7 @@ const LoginUser = () => {
       <div className="left">
         <div className="left-login ">
           <div className="text-center leading-10">
-            <p className="text-[48px] font-bold">Do you want a loand?</p>
+            <p className="text-[48px] font-bold">Do you want a loan?</p>
             <p className="text-[48px] font-bold">Start here...</p>
             <p className="text-[20px] font-bold py-1">In order to register, you must request your score first</p>
           </div>
@@ -36,14 +37,8 @@ const LoginUser = () => {
                 <label htmlFor="wallet" className="text-sm font-medium text-gray-700">
                   Connect your wallet
                 </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="wallet"
-                    id="wallet"
-                    className="text-black block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500"
-                    placeholder="Connect your wallet"
-                  />
+                <div className="mt-1 rounded-md border-solid border-gray-300 bg-indigo-600 p-2 flex justify-center">
+                  <RainbowKitCustomConnectButton />
                 </div>
               </div>
               <div>

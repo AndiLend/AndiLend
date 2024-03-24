@@ -1,8 +1,49 @@
+"use client";
+
 import React from "react";
 import HeaderPage from "../Global/HeaderPage";
 import "./Payments.css";
+import { Address } from "viem";
+import { useAccount, useConfig } from "wagmi";
+import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+import { CONTRACT_ADDRESS } from "~~/utils/scaffold-eth/constants";
 
-const LoanTable = () => {
+type Loan = {
+  amount: bigint;
+  balanceDue: bigint;
+  loanTime: bigint;
+  fee: bigint;
+  interest: number;
+  creditScore: number;
+  pendingFeesCount: number;
+  status: number;
+  proof: `0x${string}`;
+};
+
+const contractName = "AndinLend";
+const LoanTable = ({ loan, address, lender }: { loan: Loan; address: Address; lender: Address }) => {
+  const config = useConfig();
+  const { writeContractAsync, isPending } = useScaffoldWriteContract(contractName, {
+    config: config,
+  });
+
+  const { writeContractAsync: writeContractAsyncERC20, isPending: isPendingERC20 } = useScaffoldWriteContract(
+    "USDTMock",
+    { config },
+  );
+  const onPayFee = async (loan: Loan, address: Address, lender: Address) => {
+    await writeContractAsyncERC20({
+      functionName: "approve",
+      args: [CONTRACT_ADDRESS, loan.amount],
+      account: address,
+    } as never);
+    await writeContractAsync({
+      functionName: "payFee",
+      args: [lender],
+      account: address,
+    } as never);
+  };
+
   return (
     <div className="overflow-hidden ring-1 ring-white ring-opacity-5 md:rounded-lg w-full">
       <table className="min-w-full divide-y divide-gray-300">
@@ -35,18 +76,26 @@ const LoanTable = () => {
         <tbody className="divide-y divide-gray-200 bg-white">
           <tr>
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">1</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">22/01/2024</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">$108.00</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">5.1%</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">$118.90</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">22/04/2024</td>
             <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-              <span className="inline-flex rounded-full bg-purple-100 text-purple-800 px-2 text-xs font-semibold leading-5">
-                Pending
-              </span>
+              {new Date().toLocaleDateString("en-GB")}
+            </td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{address}</td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan.creditScore}</td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">${Number(loan.amount)}</td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan.interest}%</td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{Number(loan.loanTime)} months</td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+              <button
+                className="bg-[#7B61E4] text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg"
+                onClick={() => {
+                  onPayFee(loan, address, lender);
+                }}
+                disabled={isPending || isPendingERC20}
+              >
+                Pay Fee
+              </button>
             </td>
           </tr>
-          {/* ... más filas aquí ... */}
         </tbody>
       </table>
     </div>
@@ -54,11 +103,23 @@ const LoanTable = () => {
 };
 
 const Payments = () => {
+  const { address } = useAccount();
+  const { data: loan } = useScaffoldReadContract({
+    contractName,
+    functionName: "loans",
+    args: [address],
+  });
+  const { data: lender } = useScaffoldReadContract({
+    contractName,
+    functionName: "getLenderByBorrowerAddress",
+    args: [address],
+  });
+
   return (
     <div className="main">
       <HeaderPage title="Payments" description="Your history" />
       <div className="container-payments container mx-auto p-4">
-        <LoanTable />
+        <LoanTable loan={loan} address={address as Address} lender={lender as Address} />
       </div>
     </div>
   );

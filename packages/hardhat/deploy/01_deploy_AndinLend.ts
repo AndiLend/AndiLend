@@ -28,9 +28,9 @@ const deployAndinLend: DeployFunction = async function (hre: HardhatRuntimeEnvir
     // USDT scroll
     // args: ["0xf55BEC9cafDbE8730f096Aa55dad6D22d44099Df"],
     // USDT Mock Scroll Sepolia
-    // args: ["0xF9C619d863e7838730288C3fbc829658CaFc462c"]
+    args: ["0xF9C619d863e7838730288C3fbc829658CaFc462c"],
     // USDT Mock
-    args: ["0xf55BEC9cafDbE8730f096Aa55dad6D22d44099Df"],
+    // args: ["0x5FbDB2315678afecb367f032d93F642f64180aa3"],
     log: true,
     // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
     // automatically mining the contract deployment transaction. There is no effect on live networks.

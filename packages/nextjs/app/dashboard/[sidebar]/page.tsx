@@ -10,6 +10,9 @@ const page = ({ params }: { params: string }) => {
   if (rol === "investor") {
     return <InvestorDashboard params={params} />;
   }
+  if (rol === "user") {
+    return <UserDashboard params={params} />;
+  }
 };
 
 export default page;

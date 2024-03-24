@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { RainbowKitCustomConnectButton } from "../scaffold-eth";
 import "./LoginInvestor.css";
 
 const LoginInvestor = () => {
@@ -21,7 +22,7 @@ const LoginInvestor = () => {
             <p className="text-[48px] font-bold">Support a project now</p>
           </div>
           <div>
-            <Image src="/assets/etherium.png" alt="etherium" width={558} height={391} />
+            <Image src="/assets/etherium.png" alt="ethereum" width={558} height={391} />
           </div>
         </div>
       </div>
@@ -37,14 +38,8 @@ const LoginInvestor = () => {
                 <label htmlFor="wallet" className="text-sm font-medium text-gray-700">
                   Enter your wallet or ENS
                 </label>
-                <div className="mt-1">
-                  <input
-                    type="text"
-                    name="wallet"
-                    id="wallet"
-                    className="text-black block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500"
-                    placeholder="0xE1e5dcbBc95aabE80E2f9c65....."
-                  />
+                <div className="mt-1 rounded-md border-solid border-gray-300 bg-indigo-600 p-2 flex justify-center">
+                  <RainbowKitCustomConnectButton />
                 </div>
               </div>
               <div>

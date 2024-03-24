@@ -59,8 +59,8 @@ const fs = require('fs');
 
 
 // // Example usage
-// address = "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC";
-// creditScore = 1;
+address = "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC";
+creditScore = getRandomNumber(0, 1000);;;
 
 // leaf = createLeaf(address, creditScore);
 // console.log(leaf); // Output the merged leaf value
@@ -72,8 +72,8 @@ function getRandomNumber(min, max) {
 }
 
 
-address = "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC";
-creditScore = getRandomNumber(0, 1000);;
+// address = "0x0000000000000000000000000000000000000000";
+// creditScore = 0;//getRandomNumber(0, 1000);;
 let filePath = "/workspace/leafs.json"
 
 pushLeaf(address, creditScore, filePath);

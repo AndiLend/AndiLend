@@ -24,6 +24,7 @@ contract AndinLend {
 	mapping(address => Loan) public loans;
 	mapping(address => address) private borrowerToLender;
 	mapping(address => address[]) private lenderToBorrowers;
+	address[] private borrowersRegister;
 
 	event RequestedLoan(address borrower, Loan loan);
 
@@ -35,12 +36,8 @@ contract AndinLend {
 
 	IERC20 private erc20USDT;
 
-	// Verifier private verifier
-
 	constructor(address _erc20USDTAddress) {
-		//, address _verifier) {
 		erc20USDT = IERC20(_erc20USDTAddress);
-		// verifier = Verifer(_verifier);
 	}
 
 	function requestLoan(
@@ -51,6 +48,10 @@ contract AndinLend {
 		uint8 _creditScore,
 		bytes memory _proof
 	) external {
+		require(
+			loans[msg.sender].loanTime == 0 || loans[msg.sender].status == 2,
+			"Each user can only have one active loan."
+		);
 		uint dueWeeks = _loanTime / 604800;
 		uint balanceDue = ((_interest * dueWeeks * _amount) / 100) + _amount;
 		uint fee = balanceDue / _pendingFeesCount;
@@ -65,6 +66,9 @@ contract AndinLend {
 			uint8(0),
 			_proof
 		);
+		if (loans[msg.sender].status != 2) {
+			borrowersRegister.push(msg.sender);
+		}
 		loans[msg.sender] = newLoanRequest;
 		emit RequestedLoan(msg.sender, newLoanRequest);
 	}
@@ -122,12 +126,6 @@ contract AndinLend {
 		emit FinishLoan(msg.sender, _lender, loans[msg.sender]);
 	}
 
-	function getLoanByAddress(
-		address _borrower
-	) external view returns (Loan memory) {
-		return loans[_borrower];
-	}
-
 	function getLenderByBorrowerAddress(
 		address _borrower
 	) external view returns (address) {
@@ -147,5 +145,21 @@ contract AndinLend {
 		}
 
 		return loansByLend;
+	}
+
+	function getAllLoans()
+		external
+		view
+		returns (Loan[] memory, address[] memory)
+	{
+		uint addressesCount = borrowersRegister.length;
+		Loan[] memory allLoans = new Loan[](addressesCount);
+
+		for (uint i = 0; i < addressesCount; i++) {
+			address borrower = borrowersRegister[i];
+			allLoans[i] = loans[borrower];
+		}
+
+		return (allLoans, borrowersRegister);
 	}
 }
