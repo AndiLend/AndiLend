@@ -20,31 +20,27 @@ function generateZeroProverToml(){
 }
 
 async function generateRoot(leafLeft, leafRight){
-    console.log("🚀 ~ generateRoot ~ leafRight:", leafRight)
-    console.log("🚀 ~ generateRoot ~ leafLeft:", leafLeft)
     const proverContent = generateProverToml(leafLeft, leafRight);
-    console.log("🚀 ~ generateRoot ~ proverContent:", proverContent)
     await new Promise((resolve, reject) => {
-        fs.writeFile('nargo/Prover.toml', proverContent, function (err) {
+        fs.writeFile('nargo_merkle_tree/Prover.toml', proverContent, function (err) {
             if (err) {
                 console.error('Error writing to Prover.toml:', err);
                 reject();
                 return;
             }
-            console.log('Prover.toml file written successfully.');
+    
             resolve();    
         });
       });
     
     let result;
     try {
-        result = execSync('cd nargo && nargo prove');
+        result = execSync('cd nargo_merkle_tree && nargo prove');
     } catch(e) {
         console.log('nargo prove error!!! ', e);
     }
     console.log('result => ', result);
     return result.toString().trim();
-
 }
 
 function createLeaf(address, creditScore) {
@@ -101,7 +97,6 @@ function pushLeaf(address, creditScore, filePath) {
     // Write the updated Merkle tree JSON back to the file
     fs.writeFileSync(filePath, JSON.stringify(leafJson, null, 2));
 
-    console.log('New leaf added to Merkle tree JSON:', {address, creditScore });
     console.log("new leafJson.json:", leafJson)
 }
 
@@ -137,19 +132,20 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
 
     // Helper function to recursively calculate the Merkle root
     async function recursiveHash(nodes) {
-        console.log("🚀 ~ recursiveHash ~ nodes:", nodes)
         
         // Base case: If only one node is left, return its hash
         if (nodes.length === 1) {
-            console.log("finishhh")
+
             let returnJson= {
                 merkleTree,
                 root:nodes[0].leafValue
             }
             fs.writeFileSync(merkleTreePath, JSON.stringify(returnJson, null, 2));
-            console.log("🚀 ~ recursiveHash ~ returnJson:", returnJson)
+
             const hashPath = calculateHashPath(leafsJson.length -1 , merkleTree)
             console.log("🚀 ~ recursiveHash ~ hashPath:", hashPath)
+
+            fs.writeFileSync('/workspace/hashPath.json', JSON.stringify(hashPath, null, 2));
             return returnJson
         }
 
@@ -158,7 +154,7 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
         for (let i = 0; i < nodes.length; i += 2) {
             const left = nodes[i];
             const right = nodes[i + 1];
-             console.log("🚀 ~ recursiveHash ~ right:", right)
+    
              // Execute the CLI command asynchronously and wait for the result
              const leafValue = await generateRoot(left, right);
 
@@ -170,6 +166,7 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
             newNodes.push({leafValue});
         }
         // Recur with the new set of nodes
+        console.log("🚀 ~ recursiveHash ~ newNodes:", newNodes)
         merkleTree.push(newNodes)
         return recursiveHash(newNodes);
     }
@@ -181,8 +178,6 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
 }
 
 function calculateHashPath(leafIndex, merkleTree) {
-    console.log("🚀 ~ calculateHashPath ~ merkleTree:", merkleTree)
-    console.log("🚀 ~ calculateHashPath ~ leafIndex:", leafIndex)
     const hashPath = [];
 
     // Start from the bottom layer (leaves)
@@ -194,7 +189,7 @@ function calculateHashPath(leafIndex, merkleTree) {
         const currentLayer = merkleTree[layerIndex];
         const currentSiblingIndex = (currentIndex % 2 === 0) ? currentIndex + 1 : currentIndex - 1;
         const siblingLeaf = currentLayer[currentSiblingIndex];
-        console.log("🚀 ~ calculateHashPath ~ siblingLeaf:", siblingLeaf)
+
 
         // Add the sibling's leafValue to the hash path
         hashPath.push(siblingLeaf.leafValue);
