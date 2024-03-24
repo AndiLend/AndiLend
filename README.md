@@ -7,7 +7,7 @@ To get started with AndiLend, follow the steps below:
 1. Clone this repo & install dependencies
 
 ```
-[git clone https://github.com/Andilend/Andilend.git](https://github.com/AndiLend/AndiLend.git)
+git clone https://github.com/Andilend/Andilend.git
 cd AndiLend
 yarn install
 ```
