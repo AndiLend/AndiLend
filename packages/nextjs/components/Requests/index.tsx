@@ -117,8 +117,11 @@ const Requests = () => {
     contractName,
     functionName: "getAllLoans",
   });
-  const iterator = [...(data as unknown as any[])];
-  const [loans, addresses] = iterator;
+  let loans, addresses;
+  if (data) {
+    const iterator = [...(data as unknown as any[])];
+    [loans, addresses] = iterator;
+  }
 
   return (
     <div className="main-requests">

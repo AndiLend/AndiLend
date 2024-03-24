@@ -1,9 +1,9 @@
 import { ethers } from "hardhat";
 
-async function transferToken(amountToTransfer: number = 20) {
+async function transferToken(amountToTransfer: number = 80) {
   const [sender] = await ethers.getSigners();
   // 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
-  const receiverAddress = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"; // Dirección de la cuenta receptora
+  const receiverAddress = "0x7671cB3d89758C6b26F06603164719eA2f8e6CaE"; // Dirección de la cuenta receptora
   const amount = ethers.parseUnits(amountToTransfer.toString(), 18); // Cantidad de tokens a transferir, reemplaza X con la cantidad deseada
 
   // Obtener el contrato ERC20
