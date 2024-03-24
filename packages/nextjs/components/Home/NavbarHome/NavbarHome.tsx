@@ -11,7 +11,7 @@ const NavbarHome = () => {
   return (
     <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white bg-black">
       <h1 className="w-full text-3xl font-bold text-[#00df9a]">
-        <span className="w-full text-3xl font-bold">Andin Landing</span>
+        <span className="w-full text-3xl font-bold">Andin Lending</span>
       </h1>
       <ul className=" flex items-center">
         <li className="p-4">Home</li>
