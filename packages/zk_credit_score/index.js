@@ -19,7 +19,7 @@ app.get('/getCreditScore', async (req, res) => {
     console.log({ethAddress, dni, creditScore});
     pushLeaf(ethAddress, creditScore, leafsFilePath);
     const root = await calculateRoot(leafsFilePath);
-    console.log('proof => = ' + root[1]);
+    console.log('proof => = ' + root);
 
     res.json({ ethAddress, dni, creditScore });
 });
