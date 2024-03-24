@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import HeaderPage from "../Global/HeaderPage";
 import "./Payments.css";
