@@ -172,7 +172,7 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
             console.log("🚀 ~ recursiveHash ~ hashPath:", hashPath);
 
             fs.writeFileSync('/workspace/hashPath.json', JSON.stringify(hashPath, null, 2));
-            return returnJson
+            return [returnJson, proof]
         }
 
         // Recursive case: Hash pairs of nodes and concatenate the hashes
@@ -198,7 +198,7 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
     }
 
     // Start the recursion with the sorted Merkle tree data
-    const recursiveReturn = await recursiveHash(leafsJson).leafValue;
+    const recursiveReturn = await recursiveHash(leafsJson)[0].leafValue;
     console.log("root:", recursiveReturn)
     return recursiveReturn;
 }
