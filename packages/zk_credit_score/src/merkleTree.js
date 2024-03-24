@@ -19,12 +19,11 @@ function generateZeroProverToml(){
     return generateProverToml(address, creditScore)
 }
 
-async function generateRoot(leafLeft, leafRight){
-    const proverContent = generateProverToml(leafLeft, leafRight);
-    await new Promise((resolve, reject) => {
-        fs.writeFile('nargo_merkle_tree/Prover.toml', proverContent, function (err) {
+async function writeToFileSync(filePath, content) {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(filePath, content, function (err) {
             if (err) {
-                console.error('Error writing to Prover.toml:', err);
+                console.error(`Error writing to ${filePath}.`, err);
                 reject();
                 return;
             }
@@ -32,6 +31,11 @@ async function generateRoot(leafLeft, leafRight){
             resolve();    
         });
       });
+}
+
+async function generateRoot(leafLeft, leafRight){
+    const proverContent = generateProverToml(leafLeft, leafRight);
+    await writeToFileSync('nargo_merkle_tree/Prover.toml', proverContent);
     
     let result;
     try {
@@ -144,7 +148,9 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
             fs.writeFileSync(merkleTreePath, JSON.stringify(returnJson, null, 2));
 
             const hashPath = calculateHashPath(lastPushedIndex , merkleTree)
-            console.log("🚀 ~ recursiveHash ~ hashPath:", hashPath)
+            const circuitContent = getCircuitContent(hashPath, index, leaf, root);
+            await writeToFileSync('circuit/Prover.toml', circuitContent);
+            console.log("🚀 ~ recursiveHash ~ hashPath:", hashPath);
 
             fs.writeFileSync('/workspace/hashPath.json', JSON.stringify(hashPath, null, 2));
             return returnJson
