@@ -38,7 +38,7 @@ fn main(
   // pub_key_x: [u8; 32],
   // pub_key_y: [u8; 32],
   // qualification: pub Field,
-  hash_path: [Field; 3]
+  hash_path: [Field; 1]
 ) {
 
     

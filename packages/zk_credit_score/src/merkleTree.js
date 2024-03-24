@@ -4,9 +4,7 @@ const { execSync } = require("child_process");
 function generateProverToml(leafLeft, leafRight, cb) {
     // Construct the Prover.toml content
     const tomlContent = `index = "0"
-
 leafLeft = "${leafLeft.leafValue}"
-
 leafRight = "${leafRight.leafValue}"
 `;
 
@@ -43,7 +41,6 @@ async function generateRoot(leafLeft, leafRight){
     } catch(e) {
         console.log('nargo prove error!!! ', e);
     }
-    console.log('result => ', result);
     return result.toString().trim();
 }
 
@@ -116,6 +113,13 @@ function nextPowerOfTwo(n) {
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
+function getCircuitContent(hashPath, index, leaf, root) {
+    return `hash_path = [${hashPath.map(hash => `"${hash}"`+'\n')}]
+index = "${index}"
+leaf = "${leaf}"
+root = "${root}"
+`;
+}
 
 // Function to calculate the Merkle root
 async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
@@ -148,7 +152,8 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
             fs.writeFileSync(merkleTreePath, JSON.stringify(returnJson, null, 2));
 
             const hashPath = calculateHashPath(lastPushedIndex , merkleTree)
-            const circuitContent = getCircuitContent(hashPath, index, leaf, root);
+            console.log('hashPath => ', hashPath);
+            const circuitContent = getCircuitContent(hashPath, lastPushedIndex, leafsJson[lastPushedIndex].leafValue, nodes[0].leafValue);
             await writeToFileSync('circuit/Prover.toml', circuitContent);
             console.log("🚀 ~ recursiveHash ~ hashPath:", hashPath);
 
