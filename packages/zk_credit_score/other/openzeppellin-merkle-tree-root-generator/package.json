@@ -1,0 +1,10 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@openzeppelin/merkle-tree": "^1.0.6"
+  }
+}

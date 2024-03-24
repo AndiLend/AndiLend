@@ -21,7 +21,7 @@ const etherscanApiKey = process.env.ETHERSCAN_API_KEY || "DNXJA8RX2Q3VZ4URQIWP7Z
 
 const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.17",
+    version: "0.8.24",
     settings: {
       optimizer: {
         enabled: true,
@@ -121,7 +121,20 @@ const config: HardhatUserConfig = {
   },
   // configuration for harhdat-verify plugin
   etherscan: {
-    apiKey: `${etherscanApiKey}`,
+    apiKey: {
+      scrollSepolia: `${etherscanApiKey}`,
+      scroll: `${etherscanApiKey}`,
+    },
+    customChains: [
+      {
+        network: "scrollSepolia",
+        chainId: 534351,
+        urls: {
+          apiURL: "https://api-sepolia.scrollscan.com/api",
+          browserURL: "https://sepolia.scrollscan.com/",
+        },
+      },
+    ],
   },
   // configuration for etherscan-verify from hardhat-deploy plugin
   verify: {
@@ -130,7 +143,7 @@ const config: HardhatUserConfig = {
     },
   },
   sourcify: {
-    enabled: false,
+    enabled: true,
   },
 };
 
