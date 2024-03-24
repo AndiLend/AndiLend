@@ -1,12 +1,13 @@
-import { InvestorDashboard } from "~~/components/DashboardBase";
+import { InvestorDashboard, UserDashboard } from "~~/components/DashboardBase";
 
 const page = ({ params }: { params: string }) => {
-  return (
-    <div>
-      <InvestorDashboard params={params} />
-      {/* <UserDashboard params={params} /> */}
-    </div>
-  );
+  const rol = "user";
+  if (rol === "user") {
+    return <UserDashboard params={params} />;
+  }
+  if (rol === "investor") {
+    return <InvestorDashboard params={params} />;
+  }
 };
 
 export default page;
