@@ -1,6 +1,8 @@
 // import { Footer } from "../Footer";
+import Deposits from "../Deposits";
 import Navbar from "../Global/Navbar";
 import Sidebar from "../Global/Sidebar";
+import Payments from "../Payments";
 import Quests from "../Quests";
 
 export function DashboardBase({ userType, children }: { userType: string; children: JSX.Element }) {
@@ -29,14 +31,14 @@ export function UserDashboard({ params }: { params: any }) {
   if (tab === "deposits") {
     return (
       <DashboardBase userType="user">
-        <div>deposits</div>
+        <Deposits />
       </DashboardBase>
     );
   }
   if (tab === "payments") {
     return (
       <DashboardBase userType="user">
-        <div>deposits</div>
+        <Payments />
       </DashboardBase>
     );
   }
