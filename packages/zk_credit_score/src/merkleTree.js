@@ -4,9 +4,7 @@ const { execSync } = require("child_process");
 function generateProverToml(leafLeft, leafRight, cb) {
     // Construct the Prover.toml content
     const tomlContent = `index = "0"
-
 leafLeft = "${leafLeft.leafValue}"
-
 leafRight = "${leafRight.leafValue}"
 `;
 
@@ -19,12 +17,11 @@ function generateZeroProverToml(){
     return generateProverToml(address, creditScore)
 }
 
-async function generateRoot(leafLeft, leafRight){
-    const proverContent = generateProverToml(leafLeft, leafRight);
-    await new Promise((resolve, reject) => {
-        fs.writeFile('nargo_merkle_tree/Prover.toml', proverContent, function (err) {
+async function writeToFileSync(filePath, content) {
+    return new Promise((resolve, reject) => {
+        fs.writeFile(filePath, content, function (err) {
             if (err) {
-                console.error('Error writing to Prover.toml:', err);
+                console.error(`Error writing to ${filePath}.`, err);
                 reject();
                 return;
             }
@@ -32,14 +29,29 @@ async function generateRoot(leafLeft, leafRight){
             resolve();    
         });
       });
-    
+}
+
+function executeCommand(command) {
     let result;
     try {
-        result = execSync('cd nargo_merkle_tree && nargo prove');
+        result = execSync(command);
     } catch(e) {
-        console.log('nargo prove error!!! ', e);
+        console.log('command execution error!!! ', e);
     }
-    console.log('result => ', result);
+    return result;
+}
+
+function readFirstLineOfFile(filePath) {
+    const data = fs.readFileSync(filePath, 'utf8');
+    const lines = data.split('\n');
+    const firstLine = lines[0];
+    return firstLine;
+}
+
+async function generateRoot(leafLeft, leafRight){
+    const proverContent = generateProverToml(leafLeft, leafRight);
+    await writeToFileSync('nargo_merkle_tree/Prover.toml', proverContent);
+    const result = executeCommand('cd nargo_merkle_tree && nargo prove');
     return result.toString().trim();
 }
 
@@ -112,9 +124,18 @@ function nextPowerOfTwo(n) {
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
+function getCircuitContent(hashPath, index, leaf, root) {
+    return `hash_path = [${hashPath.map(hash => `"${hash}"`+'\n')}]
+index = "${index}"
+leaf = "${leaf}" 
+qualification = "2"
+root = "${root}" 
+`;
+}
 
 // Function to calculate the Merkle root
 async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
+     const lastPushedIndex = leafsJson.length -1;
      console.log("🚀 ~ calculateMerkleTreeAndRoot ~ leafsJson:", leafsJson)
      // Calculate the number of nodes required to make the tree complete
      const completeSize = nextPowerOfTwo(leafsJson.length);
@@ -142,11 +163,17 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
             }
             fs.writeFileSync(merkleTreePath, JSON.stringify(returnJson, null, 2));
 
-            const hashPath = calculateHashPath(leafsJson.length -1 , merkleTree)
-            console.log("🚀 ~ recursiveHash ~ hashPath:", hashPath)
+            const hashPath = calculateHashPath(lastPushedIndex , merkleTree)
+            console.log('hashPath => ', hashPath);
+            const circuitContent = getCircuitContent(hashPath, lastPushedIndex, leafsJson[lastPushedIndex].leafValue, nodes[0].leafValue);
+            await writeToFileSync('circuit/Prover.toml', circuitContent);
+            executeCommand('cd circuit && nargo prove');
+            const proof = readFirstLineOfFile('circuit/proofs/nargo_credit_score.proof');
+            console.log({proof});
+            console.log("🚀 ~ recursiveHash ~ hashPath:", hashPath);
 
             fs.writeFileSync('/workspace/hashPath.json', JSON.stringify(hashPath, null, 2));
-            return returnJson
+            return [returnJson, proof]
         }
 
         // Recursive case: Hash pairs of nodes and concatenate the hashes
@@ -172,7 +199,7 @@ async function calculateMerkleTreeAndRoot(leafsJson, merkleTreePath) {
     }
 
     // Start the recursion with the sorted Merkle tree data
-    const recursiveReturn = await recursiveHash(leafsJson).leafValue;
+    const recursiveReturn = await recursiveHash(leafsJson)[0].leafValue;
     console.log("root:", recursiveReturn)
     return recursiveReturn;
 }
@@ -183,12 +210,16 @@ function calculateHashPath(leafIndex, merkleTree) {
     // Start from the bottom layer (leaves)
     let layerIndex = 0;
     let currentIndex = leafIndex;
+    console.log("🚀 ~ calculateHashPath ~ currentIndex:", currentIndex)
 
     // Iterate through the layers until we reach the root
     while (layerIndex < merkleTree.length - 1) {
         const currentLayer = merkleTree[layerIndex];
+        console.log("🚀 ~ calculateHashPath ~ currentLayer:", currentLayer)
         const currentSiblingIndex = (currentIndex % 2 === 0) ? currentIndex + 1 : currentIndex - 1;
+        console.log("🚀 ~ calculateHashPath ~ currentSiblingIndex:", currentSiblingIndex)
         const siblingLeaf = currentLayer[currentSiblingIndex];
+        console.log("🚀 ~ calculateHashPath ~ siblingLeaf:", siblingLeaf)
 
 
         // Add the sibling's leafValue to the hash path
