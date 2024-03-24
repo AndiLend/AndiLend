@@ -1,27 +1,40 @@
-[
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 353,
-    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000353"
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 102,
-    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000102"
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 620,
-    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000620"
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 745,
-    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000745"
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 538,
-    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000538"
-  }
-]
+{
+  "merkleTree": [
+    [
+      {
+        "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+        "creditScore": 889,
+        "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000889"
+      },
+      {
+        "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+        "creditScore": 815,
+        "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000815"
+      },
+      {
+        "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+        "creditScore": 830,
+        "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000830"
+      },
+      {
+        "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+        "creditScore": 681,
+        "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000681"
+      }
+    ],
+    [
+      {
+        "leafValue": "0x041a457ba50c88846f16c1ae33c8593fcde407f0841efb06386eb0104227f7cb"
+      },
+      {
+        "leafValue": "0x041a457ba50c88846f16c1ae33c8593fcde407f0841efb06386eb0104227f7cb"
+      }
+    ],
+    [
+      {
+        "leafValue": "0x041a457ba50c88846f16c1ae33c8593fcde407f0841efb06386eb0104227f7cb"
+      }
+    ]
+  ],
+  "root": "0x041a457ba50c88846f16c1ae33c8593fcde407f0841efb06386eb0104227f7cb"
+}

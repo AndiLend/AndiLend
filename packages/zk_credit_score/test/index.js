@@ -3,9 +3,9 @@ const {
     generateZeroProverToml,
     generateRoot,
     createLeaf,
-    pushLeafToMerkleTree,
+    pushLeaf,
     createEmptyLeaf,
-    calculateMerkleRoot
+    calculateMerkleTreeAndRoot
 } = require('../src/merkleTree');
 const { exec } = require ('child_process');
 const fs = require('fs');
@@ -74,33 +74,34 @@ function getRandomNumber(min, max) {
 
 address = "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC";
 creditScore = getRandomNumber(0, 1000);;
-let filePath = "/workspace/merkleTree.json"
+let filePath = "/workspace/leafs.json"
 
-pushLeafToMerkleTree(address, creditScore, filePath);
+pushLeaf(address, creditScore, filePath);
 
-address = "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC";
-creditScore = getRandomNumber(0, 1000);;
-filePath = "/workspace/merkleTree.json"
+// address = "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC";
+// creditScore = getRandomNumber(0, 1000);;
+// filePath = "/workspace/merkleTree.json"
 
-// pushLeafToMerkleTree(address, creditScore, filePath);
-// pushLeafToMerkleTree(address, creditScore, filePath);
+// pushLeaf(address, creditScore, filePath);
+// pushLeaf(address, creditScore, filePath);
 
 
 // Function to push a new leaf to the Merkle tree JSON file
-async function calculate(filePath) {
-    let merkleTree = [];
+async function calculateRoot(filePath) {
+    let leafs = [];
 
     // Check if the file exists
     if (fs.existsSync(filePath)) {
         // Read the existing Merkle tree JSON file
-        merkleTree = JSON.parse(fs.readFileSync(filePath));
+        leafs = JSON.parse(fs.readFileSync(filePath));
     }
+    let merkleTreePath = "/workspace/merkleTree.json"
 
-    const myRoot = await calculateMerkleRoot(merkleTree);
-    console.log("🚀 ~ calculate ~ myRoot:", myRoot)
+    const myRoot = await calculateMerkleTreeAndRoot(leafs, merkleTreePath);
+    console.log("🚀 ~ calculateRoot ~ myRoot:", myRoot)
     
 }
 
-calculate(filePath).then(result => {
+calculateRoot(filePath).then(result => {
     console.log("result: ", result)
 });
