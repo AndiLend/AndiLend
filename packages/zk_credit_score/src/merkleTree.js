@@ -1,20 +1,16 @@
 const fs = require("fs");
 
-function generateProverToml(address, creditScore) {
-    // Left-pad the Ethereum address and number with zeros to make them 64 bytes long
-    const paddedLeafLeft = "0x" + address.slice(2).padStart(64, '0');
-    const paddedLeafRight = "0x" + creditScore.toString(16).padStart(64, '0');
-
+function generateProverToml(leafLeft, leafRight) {
     // Construct the Prover.toml content
     const tomlContent = `
 [index]
 value = "0"
 
 [leafLeft]
-value = "${paddedLeafLeft}"
+value = "${leafLeft.leafValue}"
 
 [leafRight]
-value = "${paddedLeafRight}"
+value = "${leafRight.leafValue}"
 `;
 
     return tomlContent;
@@ -26,8 +22,12 @@ function generateZeroProverToml(){
     return generateProverToml(address, creditScore)
 }
 
-function generateRoot(address, creditScore){
-    generateProverToml(address, creditScore);
+async function generateRoot(leafLeft, leafRight){
+    generateProverToml(leafLeft, leafRight);
+    const { stdout, stderr } = await exec('cd nargo && nargo prove');
+    console.log("🚀 ~ generateRoot ~ stderr:", stderr)
+    console.log("🚀 ~ generateRoot ~ stdout:", stdout)
+    return stdout
 
 }
 
@@ -91,27 +91,32 @@ function pushLeafToMerkleTree(address, creditScore, filePath) {
 
 // Function to calculate the smallest power of 2 greater than or equal to a given number
 function nextPowerOfTwo(n) {
-    let power = 1;
+    let power = 2;
     while (power < n) {
         power *= 2;
     }
     return power;
 }
 
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+
 
 // Function to calculate the Merkle root
-function calculateMerkleRoot(merkleTreeJson) {
+async function calculateMerkleRoot(merkleTreeJson) {
      // Calculate the number of nodes required to make the tree complete
      const completeSize = nextPowerOfTwo(merkleTreeJson.length);
+     console.log("🚀 ~ calculateMerkleRoot ~ completeSize:", completeSize)
 
      // If the number of nodes is not a power of 2, add empty leaf nodes
      const numEmptyLeaves = completeSize - merkleTreeJson.length;
+     console.log("🚀 ~ calculateMerkleRoot ~ numEmptyLeaves:", numEmptyLeaves)
      for (let i = 0; i < numEmptyLeaves; i++) {
         merkleTreeJson.push(createEmptyJsonLeaf());
      }
 
     // Helper function to recursively calculate the Merkle root
-    function recursiveHash(nodes) {
+    async function recursiveHash(nodes) {
         console.log("🚀 ~ recursiveHash ~ nodes:", nodes)
         
         // Base case: If only one node is left, return its hash
@@ -124,17 +129,22 @@ function calculateMerkleRoot(merkleTreeJson) {
         for (let i = 0; i < nodes.length; i += 2) {
             const left = nodes[i];
             const right = nodes[i + 1];
-            const leafValue = left.leafValue+right.leafValue
+             // Execute the CLI command asynchronously and wait for the result
+             const leafValue = await generateRoot(left, right);
+
+            //  // Process the command output and update newNodes accordingly
+            //  // This is just a placeholder, you should replace it with your logic
+            //  const leafValue = stdout; // Assuming the output contains the leaf value
+
+            // const leafValue = left.leafValue+right.leafValue
             newNodes.push({leafValue});
         }
-
-        
         // Recur with the new set of nodes
         return recursiveHash(newNodes);
     }
 
     // Start the recursion with the sorted Merkle tree data
-    const recursiveReturn = recursiveHash(merkleTreeJson).leafValue;
+    const recursiveReturn = await recursiveHash(merkleTreeJson).leafValue;
     console.log("root:", recursiveReturn)
     return recursiveReturn;
 }
