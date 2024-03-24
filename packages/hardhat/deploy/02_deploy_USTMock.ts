@@ -21,7 +21,7 @@ const deployUSDTMock: DeployFunction = async function (hre: HardhatRuntimeEnviro
   */
   const { deployer } = await hre.getNamedAccounts();
   const { deploy } = hre.deployments;
-  const totalSupply = (10 ** 9).toString();
+  const totalSupply = (5).toString();
   await deploy("USDTMock", {
     from: deployer,
     // Contract constructor arguments
@@ -31,6 +31,7 @@ const deployUSDTMock: DeployFunction = async function (hre: HardhatRuntimeEnviro
     // automatically mining the contract deployment transaction. There is no effect on live networks.
     autoMine: true,
   });
+  console.log(hre.ethers.parseEther(totalSupply));
 
   // Get the deployed contract to interact with it after deploying.
   const usdtMock = await hre.ethers.getContract<Contract>("USDTMock", deployer);

@@ -27,6 +27,8 @@ const deployAndinLend: DeployFunction = async function (hre: HardhatRuntimeEnvir
     // Contract constructor arguments
     // USDT scroll
     // args: ["0xf55BEC9cafDbE8730f096Aa55dad6D22d44099Df"],
+    // USDT Mock Scroll Sepolia
+    // args: ["0xF9C619d863e7838730288C3fbc829658CaFc462c"]
     // USDT Mock
     args: ["0xf55BEC9cafDbE8730f096Aa55dad6D22d44099Df"],
     log: true,
