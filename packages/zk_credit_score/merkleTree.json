@@ -1,86 +1,82 @@
 [
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 800
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 800
+    "creditScore": 100,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000100"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 800
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 800
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 800
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 800
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 800
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   },
   {
     "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 800
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 800
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
-  },
-  {
-    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
-    "creditScore": 900
+    "creditScore": 800,
+    "leafValue": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC000000000000000000000800"
   }
 ]

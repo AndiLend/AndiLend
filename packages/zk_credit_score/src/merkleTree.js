@@ -53,6 +53,18 @@ function createEmptyLeaf(){
     return createLeaf(address, creditScore);
 }
 
+
+function createEmptyJsonLeaf(){
+    const address ="0x0000000000000000000000000000000000000000";
+    const creditScore = 0;
+    return {
+        address: address,
+        creditScore: creditScore,
+        leafValue: createLeaf(address, creditScore)
+    }
+}
+
+
 // Function to push a new leaf to the Merkle tree JSON file
 function pushLeafToMerkleTree(address, creditScore, filePath) {
     let merkleTree = [];
@@ -66,7 +78,8 @@ function pushLeafToMerkleTree(address, creditScore, filePath) {
     // Push the new leaf to the Merkle tree
     merkleTree.push({
         address: address,
-        creditScore: creditScore
+        creditScore: creditScore,
+        leafValue: createLeaf(address, creditScore)
     });
 
     // Write the updated Merkle tree JSON back to the file
@@ -76,19 +89,34 @@ function pushLeafToMerkleTree(address, creditScore, filePath) {
     console.log("new merkleTree.json:", merkleTree)
 }
 
+// Function to calculate the smallest power of 2 greater than or equal to a given number
+function nextPowerOfTwo(n) {
+    let power = 1;
+    while (power < n) {
+        power *= 2;
+    }
+    return power;
+}
+
 
 // Function to calculate the Merkle root
 function calculateMerkleRoot(merkleTreeJson) {
-    // If the number of nodes is odd, add an empty leaf node
-    if (merkleTreeJson.length % 2 !== 0) {
-        merkleTreeJson.push(createEmptyLeaf);
-    }
+     // Calculate the number of nodes required to make the tree complete
+     const completeSize = nextPowerOfTwo(merkleTreeJson.length);
+
+     // If the number of nodes is not a power of 2, add empty leaf nodes
+     const numEmptyLeaves = completeSize - merkleTreeJson.length;
+     for (let i = 0; i < numEmptyLeaves; i++) {
+        merkleTreeJson.push(createEmptyJsonLeaf());
+     }
 
     // Helper function to recursively calculate the Merkle root
     function recursiveHash(nodes) {
+        console.log("🚀 ~ recursiveHash ~ nodes:", nodes)
+        
         // Base case: If only one node is left, return its hash
         if (nodes.length === 1) {
-            return nodes[nodes.lengt -1]
+            return nodes[0]
         }
 
         // Recursive case: Hash pairs of nodes and concatenate the hashes
@@ -96,17 +124,19 @@ function calculateMerkleRoot(merkleTreeJson) {
         for (let i = 0; i < nodes.length; i += 2) {
             const left = nodes[i];
             const right = nodes[i + 1];
-            const hash = left+right
-            newNodes.push(hash);
+            const leafValue = left.leafValue+right.leafValue
+            newNodes.push({leafValue});
         }
+
         
-        console.log("🚀 ~ recursiveHash ~ newNodes:", newNodes)
         // Recur with the new set of nodes
         return recursiveHash(newNodes);
     }
 
     // Start the recursion with the sorted Merkle tree data
-    return recursiveHash(merkleTreeJson);
+    const recursiveReturn = recursiveHash(merkleTreeJson).leafValue;
+    console.log("root:", recursiveReturn)
+    return recursiveReturn;
 }
 
 
