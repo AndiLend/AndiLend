@@ -17,9 +17,9 @@ describe("AndinLend", function () {
     await usdtMock.waitForDeployment();
 
     // Transfer USDT to accounts
-    const balance1 = (500 * 10 ** 6).toString();
+    const balance1 = (100 * 10 ** 6).toString();
     await usdtMock.transfer(account1.getAddress(), balance1);
-    const balance2 = (1000 * 10 ** 6).toString();
+    const balance2 = (200 * 10 ** 6).toString();
     await usdtMock.transfer(account2.getAddress(), balance2);
 
     // Deploy AndinLend
@@ -32,7 +32,7 @@ describe("AndinLend", function () {
 
   describe("Deployment", function () {
     it("Should request a loan", async function () {
-      const amount = (5 * 10 ** 6).toString();
+      const amount = (50 * 10 ** 6).toString();
       const loanTime = (121 * 10 ** 4).toString();
       const interest = (14).toString();
       const pendingFeesCount = (2).toString();
@@ -48,21 +48,19 @@ describe("AndinLend", function () {
         ethers.toUtf8Bytes(proof),
       );
       const loanAccount1 = await andinLend.getLoanByAddress(await account1.getAddress());
-      expect(loanAccount1[1]).to.be.equal(6400000n);
+      expect(loanAccount1[1]).to.be.equal(64000000n);
     });
 
     it("Should grant loan", async function () {
       const andinLendAccount2 = andinLend.connect(account2);
 
-      let balanceAccount1 = await usdtMock.balanceOf(await account1.getAddress());
-      let balanceAccount2 = await usdtMock.balanceOf(await account2.getAddress());
-      console.log(balanceAccount1);
-      console.log(balanceAccount2);
+      const loanAccount1 = await andinLend.getLoanByAddress(await account1.getAddress());
+      await usdtMock.connect(account2).approve(await andinLend.getAddress(), loanAccount1[0]);
       await andinLendAccount2.grantLoan(await account1.getAddress());
-      balanceAccount1 = await usdtMock.balanceOf(await account1.getAddress());
-      balanceAccount2 = await usdtMock.balanceOf(await account2.getAddress());
-      console.log(balanceAccount1);
-      console.log(balanceAccount2);
+      const balanceAccount1 = await usdtMock.balanceOf(await account1.getAddress());
+      const balanceAccount2 = await usdtMock.balanceOf(await account2.getAddress());
+      expect(balanceAccount1).to.be.equal(150000000n);
+      expect(balanceAccount2).to.be.equal(150000000n);
     });
   });
 });

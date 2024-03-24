@@ -2,6 +2,7 @@
 pragma solidity >=0.8.0 <0.9.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Permit.sol";
 
 /**
  * A smart contract that allows users to create loans requests and lenders to borrow USDTs
@@ -79,7 +80,7 @@ contract AndinLend {
 			"Insufficient USDT balance."
 		);
 
-		erc20USDT.transfer(_borrower, loans[_borrower].amount);
+		erc20USDT.transferFrom(msg.sender, _borrower, loans[_borrower].amount);
 		loans[_borrower].status = 1;
 		borrowerToLender[_borrower] = msg.sender;
 		lenderToBorrowers[msg.sender].push(_borrower);
