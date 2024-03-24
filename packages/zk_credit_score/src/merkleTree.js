@@ -1,9 +1,8 @@
 const fs = require("fs");
 
-function generateProverToml(leafLeft, leafRight) {
+function generateProverToml(leafLeft, leafRight, cb) {
     // Construct the Prover.toml content
-    const tomlContent = `
-[index]
+    const tomlContent = `[index]
 value = "0"
 
 [leafLeft]
@@ -23,7 +22,19 @@ function generateZeroProverToml(){
 }
 
 async function generateRoot(leafLeft, leafRight){
-    generateProverToml(leafLeft, leafRight);
+    const proverContent = generateProverToml(leafLeft, leafRight);
+    const p = new Promise((resolve, reject) => {
+        fs.writeFileSync('nargo/Prover.toml', proverContent, function (err) {
+            if (err) {
+                console.error('Error writing to Prover.toml:', err);
+                reject();
+                return;
+            }
+            console.log('Prover.toml file written successfully.');
+            resolve();    
+        });
+      });
+    await p;
     const { stdout, stderr } = await exec('cd nargo && nargo prove');
     console.log("🚀 ~ generateRoot ~ stderr:", stderr)
     console.log("🚀 ~ generateRoot ~ stdout:", stdout)
