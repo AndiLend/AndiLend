@@ -1,7 +1,8 @@
 import React from "react";
+import LoginInvestor from "~~/components/Login/LoginInvestor";
 
 const page = () => {
-  return <div>investor</div>;
+  return <LoginInvestor />;
 };
 
 export default page;
