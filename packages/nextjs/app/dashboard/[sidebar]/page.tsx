@@ -1,7 +1,9 @@
+"use client";
+
 import { InvestorDashboard, UserDashboard } from "~~/components/DashboardBase";
 
 const page = ({ params }: { params: string }) => {
-  const rol = "user";
+  const rol = localStorage.getItem("rol") || "user";
   if (rol === "user") {
     return <UserDashboard params={params} />;
   }

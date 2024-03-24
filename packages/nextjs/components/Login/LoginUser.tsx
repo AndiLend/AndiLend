@@ -1,7 +1,17 @@
+"use client";
+
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import "./LoginUser.css";
 
 const LoginUser = () => {
+  const router = useRouter();
+  const handleLoginUser = (e: any) => {
+    e.preventDefault();
+    localStorage.setItem("rol", "user");
+    router.push("/dashboard/quests", { scroll: false });
+  };
+
   return (
     <div className="container-login">
       <div className="left">
@@ -31,7 +41,7 @@ const LoginUser = () => {
                     type="text"
                     name="wallet"
                     id="wallet"
-                    className="block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500"
+                    className="text-black block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500"
                     placeholder="Connect your wallet"
                   />
                 </div>
@@ -45,7 +55,7 @@ const LoginUser = () => {
                     type="text"
                     name="national-identity"
                     id="national-identity"
-                    className="block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500"
+                    className="text-black block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500"
                     placeholder="0000000005-9"
                   />
                 </div>
@@ -66,6 +76,7 @@ const LoginUser = () => {
             </div>
             <div className="form-submit">
               <button
+                onClick={handleLoginUser}
                 type="submit"
                 className="flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:border-indigo-700 focus:ring focus:ring-indigo-200"
               >
