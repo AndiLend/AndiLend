@@ -7,4 +7,4 @@
 
 ## Landing
 
-- [Andin Lending](https://anding-lending.vercel.app)
+- [Andin Lending](https://andin-lending.vercel.app)
