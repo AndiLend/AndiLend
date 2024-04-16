@@ -3,7 +3,7 @@ import { FaFacebookSquare, FaGithubSquare, FaInstagram, FaTwitterSquare } from "
 
 const FooterHome = () => {
   return (
-    <div className="bg-[#412C94]">
+    <div className="bg-primary">
       <div className="max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300 ">
         <div>
           <span className="w-full text-3xl font-bold">Crypto</span>

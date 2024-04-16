@@ -15,7 +15,7 @@ const LoginUser = () => {
 
   return (
     <div className="container-login">
-      <div className="left">
+      <div className="left bg-primary">
         <div className="left-login ">
           <div className="text-center leading-10">
             <p className="text-[48px] font-bold">Do you want a loan?</p>
@@ -31,6 +31,10 @@ const LoginUser = () => {
           <p className="text-[40px] font-bold text-center text-[#5100D7] underline underline-offset-8">
             Register as user
           </p>
+          <p className="text-[40px] font-bold text-center text-[#5100D7] underline underline-offset-8">
+            Register as user
+          </p>
+
           <form className="space-y-6 form-login" action="#" method="POST">
             <div className="form-login-input">
               <div>

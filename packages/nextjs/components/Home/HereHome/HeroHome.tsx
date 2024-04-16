@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const HeroHome = () => {
   return (
-    <div className="text-white bg-[#412C94]">
+    <div className="text-white bg-primary">
       <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
         <div className=" ">
           <h1 className="md:text-7xl sm:text-6xl text-4xl font-bold md:py-6">Grow with data.</h1>
