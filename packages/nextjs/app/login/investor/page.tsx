@@ -1,8 +1,8 @@
 import React from "react";
-import LoginInvestor from "~~/components/Login/LoginInvestor";
+import Login from "~~/components/Login";
 
 const page = () => {
-  return <LoginInvestor />;
+  return <Login userType="investor" />;
 };
 
 export default page;

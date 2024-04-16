@@ -1,8 +1,8 @@
 import React from "react";
-import LoginUser from "~~/components/Login/LoginUser";
+import Login from "~~/components/Login";
 
 const page = () => {
-  return <LoginUser />;
+  return <Login userType="user" />;
 };
 
 export default page;

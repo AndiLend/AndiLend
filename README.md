@@ -8,3 +8,11 @@
 ## Landing
 
 - [Andin Lending](https://andin-lending.vercel.app)
+
+# Run the project
+
+```
+yarn chain
+yarn deploy
+yarn start
+```
