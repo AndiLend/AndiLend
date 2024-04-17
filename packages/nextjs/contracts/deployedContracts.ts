@@ -368,6 +368,71 @@ const deployedContracts = {
           type: "function",
         },
         {
+          inputs: [],
+          name: "getAllPendingLoans",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "balanceDue",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "loanTime",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "fee",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "interest",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "creditScore",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "pendingFeesCount",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "status",
+                  type: "uint8",
+                },
+                {
+                  internalType: "bytes",
+                  name: "proof",
+                  type: "bytes",
+                },
+              ],
+              internalType: "struct AndinLend.Loan[]",
+              name: "",
+              type: "tuple[]",
+            },
+            {
+              internalType: "address[]",
+              name: "",
+              type: "address[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
           inputs: [
             {
               internalType: "address",

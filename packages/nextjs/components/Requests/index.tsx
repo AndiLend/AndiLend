@@ -35,16 +35,28 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
     { config },
   );
   const onApprove = async (loan: Loan, address: Address) => {
-    await writeContractAsyncERC20({
-      functionName: "approve",
-      args: [CONTRACT_ADDRESS, loan.amount],
-      account: userAddress,
-    } as never);
-    await writeContractAsync({
-      functionName: "grantLoan",
-      args: [address],
-      account: userAddress,
-    } as never);
+    try {
+      await writeContractAsyncERC20(
+        {
+          functionName: "approve",
+          args: [CONTRACT_ADDRESS, loan.amount],
+          account: userAddress,
+        } as never,
+        {
+          onSuccess: async txnReceipt => {
+            console.log("📦 Transaction blockHash", txnReceipt);
+            console.log("==> loan = ", loan, " ==> address = ", address);
+            await writeContractAsync({
+              functionName: "grantLoan",
+              args: [address],
+              account: userAddress,
+            } as never);
+          },
+        },
+      );
+    } catch (error) {
+      console.log("Pasa causa!");
+    }
   };
 
   return (
@@ -81,7 +93,7 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
 
         <tbody className="divide-y divide-gray-200 bg-white">
           {loans?.map((loan: Loan, id): React.ReactNode => {
-            return (
+            return loan.amount === 0n ? null : (
               <tr key={id}>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{id}</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
@@ -115,7 +127,7 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
 const Requests = () => {
   const { data } = useScaffoldReadContract({
     contractName,
-    functionName: "getAllLoans",
+    functionName: "getAllPendingLoans",
   });
   let loans, addresses;
   if (data) {

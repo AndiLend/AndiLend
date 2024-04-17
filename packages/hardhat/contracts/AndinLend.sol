@@ -162,4 +162,16 @@ contract AndinLend {
 
 		return (allLoans, borrowersRegister);
 	}
+
+	// get all loans with status = 0
+	function getAllPendingLoans() external view returns (Loan[] memory, address[] memory) {
+		Loan[] memory pendingLoans = new Loan[](borrowersRegister.length);
+		for (uint i = 0; i < borrowersRegister.length; i++) {
+			address borrower = borrowersRegister[i];
+			if (loans[borrower].status == 0) {
+				pendingLoans[i] = loans[borrower];
+			}
+		}
+		return (pendingLoans, borrowersRegister);
+	}
 }

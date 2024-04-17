@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { RainbowKitCustomConnectButton } from "../scaffold-eth";
+import { FaucetButton, RainbowKitCustomConnectButton } from "../scaffold-eth";
 
 const UserForm = () => {
   const router = useRouter();
@@ -37,6 +37,7 @@ const UserForm = () => {
               Connect your wallet
             </label>
             <RainbowKitCustomConnectButton />
+            <FaucetButton />
           </div>
           <div>
             <label htmlFor="national-identity" className="text-sm font-medium text-gray-700">

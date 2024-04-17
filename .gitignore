@@ -19,3 +19,4 @@ merkleTree.json
 .vscode
 .idea
 .vercel
+.env

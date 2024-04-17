@@ -1,74 +1,62 @@
-{
-  "merkleTree": [
-    [
-      {
-        "address": "0x0000000000000000000000000000000000000000",
-        "creditScore": 0,
-        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
-      },
-      {
-        "address": "0x0000000000000000000000000000000000000000",
-        "creditScore": 0,
-        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
-      },
-      {
-        "address": "0x0000000000000000000000000000000000000000",
-        "creditScore": 0,
-        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
-      },
-      {
-        "address": "0x0000000000000000000000000000000000000000",
-        "creditScore": 0,
-        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
-      },
-      {
-        "address": "0x0000000000000000000000000000000000000000",
-        "creditScore": 0,
-        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
-      },
-      {
-        "address": "0x0000000000000000000000000000000000000000",
-        "creditScore": 0,
-        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
-      },
-      {
-        "address": "0x0000000000000000000000000000000000000000",
-        "creditScore": 0,
-        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
-      },
-      {
-        "address": "0x0000000000000000000000000000000000000000",
-        "creditScore": 0,
-        "leafValue": "0x0000000000000000000000000000000000000000000000000000000000000000"
-      }
-    ],
-    [
-      {
-        "leafValue": "0x27b1d0839a5b23baf12a8d195b18ac288fcf401afb2f70b8a4b529ede5fa9fed"
-      },
-      {
-        "leafValue": "0x27b1d0839a5b23baf12a8d195b18ac288fcf401afb2f70b8a4b529ede5fa9fed"
-      },
-      {
-        "leafValue": "0x27b1d0839a5b23baf12a8d195b18ac288fcf401afb2f70b8a4b529ede5fa9fed"
-      },
-      {
-        "leafValue": "0x27b1d0839a5b23baf12a8d195b18ac288fcf401afb2f70b8a4b529ede5fa9fed"
-      }
-    ],
-    [
-      {
-        "leafValue": "0x21dbfd1d029bf447152fcf89e355c334610d1632436ba170f738107266a71550"
-      },
-      {
-        "leafValue": "0x21dbfd1d029bf447152fcf89e355c334610d1632436ba170f738107266a71550"
-      }
-    ],
-    [
-      {
-        "leafValue": "0x0bcd1f91cf7bdd471d0a30c58c4706f3fdab3807a954b8f5b5e3bfec87d001bb"
-      }
-    ]
-  ],
-  "root": "0x0bcd1f91cf7bdd471d0a30c58c4706f3fdab3807a954b8f5b5e3bfec87d001bb"
-}
+[
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 800
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 800
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 800
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 800
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 900
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 900
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 800
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 900
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 900
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 800
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 900
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 900
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 800
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 900
+  },
+  {
+    "address": "0x7a9f3B6e44C2e808d3Ff7a4e3e15C6c5e8D42ABC",
+    "creditScore": 900
+  }
+]
