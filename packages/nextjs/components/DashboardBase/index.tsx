@@ -1,4 +1,7 @@
+"use client";
+
 // import { Footer } from "../Footer";
+import { useEffect, useState } from "react";
 import Approved from "../Approved";
 import Deposits from "../Deposits";
 import Navbar from "../Global/Navbar";
@@ -12,9 +15,9 @@ export function DashboardBase({ userType, children }: { userType: string; childr
     <>
       <div className="flex">
         <Sidebar userType={userType} />
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col sm:ml-64">
           <Navbar />
-          <main className="flex-1 p-6">{children}</main>
+          <main className="flex-1 p-6 bg-neutral-content">{children}</main>
         </div>
       </div>
     </>
@@ -98,3 +101,21 @@ export function InvestorDashboard({ params }: { params: any }) {
     );
   }
 }
+
+const Dashboard = ({ params }: { params: string }) => {
+  const [rol, setRol] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedRol = localStorage.getItem("rol");
+    setRol(storedRol);
+  }, []);
+
+  if (rol === "user") {
+    return <UserDashboard params={params} />;
+  }
+  if (rol === "investor") {
+    return <InvestorDashboard params={params} />;
+  }
+};
+
+export default Dashboard;

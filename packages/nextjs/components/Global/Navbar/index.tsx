@@ -4,9 +4,13 @@ import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaff
 
 const index = () => {
   return (
-    <div className="bg-purple-800 shadow py-4 px-4 flex justify-end">
-      <Image src="/assets/sidebar/bell-ring.svg" alt="ring" width={24} height={24} className="mr-3" />
-      <RainbowKitCustomConnectButton />
+    <div className="bg-neutral py-4 px-4 flex justify-end">
+      <button>
+        <Image src="/assets/sidebar/bell-ring.svg" alt="ring" width={24} height={24} className="mr-3" />
+      </button>
+      <div className="w-1/6">
+        <RainbowKitCustomConnectButton />
+      </div>
       <FaucetButton />
     </div>
   );
