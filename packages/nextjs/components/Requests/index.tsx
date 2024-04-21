@@ -103,7 +103,9 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan.creditScore}</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">${Number(loan.amount)}</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan.interest}%</td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{Number(loan.loanTime)} months</td>
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                  {Number(loan.loanTime) / 2_628_000} months
+                </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
                   <button
                     className="bg-[#7B61E4] text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg"
