@@ -19,10 +19,10 @@ const Login = ({ userType }: ILogin) => {
 
   return (
     <div className="flex h-screen">
-      <div className="flex w-2/4 bg-primary flex flex-col items-center">
+      <div className="flex w-2/4 bg-primary flex-col items-center">
         <ImageSection {...imageProps} />
       </div>
-      <div className="flex w-3/4 flex-col justify-center items-center">
+      <div className="flex w-3/4 flex-col justify-center items-center gap-2">
         {userType === "investor" ? <InvestorForm /> : <UserForm />}
       </div>
     </div>

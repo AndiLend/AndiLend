@@ -14,7 +14,7 @@ import { getBlockExplorerAddressLink } from "~~/utils/scaffold-eth";
 /**
  * Custom Wagmi Connect Button (watch balance + custom design)
  */
-export const RainbowKitCustomConnectButton = () => {
+export const RainbowKitCustomConnectButton = ({ text = "Connect Wallet" }: { text?: string }) => {
   // TODO: Add back autoconnect or use wagmi default autconnect should work
   // useAutoConnect();
   const networkColor = useNetworkColor();
@@ -38,7 +38,7 @@ export const RainbowKitCustomConnectButton = () => {
                     onClick={openConnectModal}
                     type="button"
                   >
-                    Connect Wallet
+                    {text}
                   </button>
                 );
               }

@@ -6,7 +6,7 @@ import "./Quests.css";
 
 const Quests = () => {
   return (
-    <div className="main">
+    <div className="">
       <HeaderPage title="¡Welcome, Pedro.eth!" description="Receive funds for your projects, filling out the form" />
       <div className="container">
         <div className="flex-auto w-64 right ">

@@ -12,7 +12,7 @@ import NavbarHome from "~~/components/Home/NavbarHome/NavbarHome";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <>
       <NavbarHome />
       <HeroHome />
       <CryptoCapHome />
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
       {/* <StartHome /> */}
       {/* <AboutHome /> */}
       <FooterHome />
-    </div>
+    </>
   );
 };
 
