@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import Score from "../Score/Score";
 
-const CreditScore = () => {
-  const [scoreData, setScoreData] = useState(80);
-  console.log(setScoreData);
-
+interface ICreditScore {
+  scoreData: number;
+}
+const CreditScore = ({ scoreData }: ICreditScore) => {
   return (
     <div className="p-8 shadow-lg h-full">
       <h3 className="text-lg font-semibold text-black">Credit Score</h3>

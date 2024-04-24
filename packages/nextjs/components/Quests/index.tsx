@@ -2,8 +2,10 @@ import React from "react";
 import FoundingForm from "../FoundingForm";
 import CreditScore from "../Global/CreditScore";
 import HeaderPage from "../Global/HeaderPage";
+import useQuests from "./useQuests";
 
 const Quests = () => {
+  const { scoreData } = useQuests();
   return (
     <div className="p-4 h-full flex flex-col">
       <HeaderPage title="¡Welcome, Pedro.eth!" description="Receive funds for your projects, filling out the form" />
@@ -12,7 +14,7 @@ const Quests = () => {
           <FoundingForm />
         </div>
         <div className="flex-auto w-32 h-dvh bg-neutral">
-          <CreditScore />
+          <CreditScore scoreData={scoreData} />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 import React from "react";
 import HeaderPage from "../Global/HeaderPage";
-import "./Payments.css";
+import usePayments from "./usePayments";
 
 // // import { Address } from "viem";
 // import { useAccount } from "wagmi";
@@ -23,35 +23,6 @@ import "./Payments.css";
 
 // const contractName = "AndinLend";
 
-const paymentsData = [
-  {
-    date: new Date().toLocaleDateString("en-GB"),
-    amount: "108.00",
-    interest: "5.1",
-    total: "118.90",
-    payDay: "22/04/2024",
-    status: "Pending",
-    actions: "pending",
-  },
-  {
-    date: "24/04/2024",
-    amount: "108.00",
-    interest: "5.1",
-    total: "118.90",
-    payDay: "22/04/2024",
-    status: "Payed",
-    actions: "payed",
-  },
-  {
-    date: "24/04/2024",
-    amount: "108.00",
-    interest: "5.1",
-    total: "118.90",
-    payDay: "22/04/2024",
-    status: "Pending",
-    actions: "pending",
-  },
-];
 const LoanTable = () => {
   // const config = useConfig();
   // const { writeContractAsync, isPending } = useScaffoldWriteContract(contractName, {
@@ -74,6 +45,8 @@ const LoanTable = () => {
   //     account: address,
   //   } as never);
   // };
+
+  const { paymentsData } = usePayments();
 
   const handlePayNow = () => {
     console.log("handlePayNow");

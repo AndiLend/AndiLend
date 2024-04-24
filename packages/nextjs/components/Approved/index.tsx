@@ -1,28 +1,17 @@
 import React from "react";
 import HeaderPage from "../Global/HeaderPage";
+import useApproved from "./useApproved";
 
-const approvedData = [
-  {
-    requestDate: "22/01/2024",
-    address: "0xE1e5dcbBa",
-    score: "Medium",
-    amount: 3.55,
-    interest: 5.4,
-    payDay: "23/02/2025",
-    status: "Approved",
-  },
-  {
-    requestDate: "22/01/2024",
-    address: "0xE1e5dcbBa",
-    score: "Medium",
-    amount: 3.55,
-    interest: 5.4,
-    payDay: "23/02/2025",
-    status: "Approved",
-  },
-];
-
-const ApprovedTable = () => {
+interface IApprovedTable {
+  requestDate: string;
+  address: string;
+  score: string | number;
+  amount: string | number;
+  interest: string | number;
+  payDay: string;
+  status: string;
+}
+const ApprovedTable = ({ approvedData }: { approvedData: IApprovedTable[] }) => {
   return (
     <div className="overflow-hidden ring-1 ring-white ring-opacity-5 md:rounded-lg w-full">
       <table className="min-w-full divide-y divide-gray-300">
@@ -98,11 +87,12 @@ const ApprovedTable = () => {
 };
 
 const Approved = () => {
+  const { approvedData } = useApproved();
   return (
     <div className="p-4 h-full flex flex-col">
       <HeaderPage title="Approved Loans" description="You can see all the deposits made it" />
       <div className="flex h-full gap-4 pt-4">
-        <ApprovedTable />
+        <ApprovedTable approvedData={approvedData} />
       </div>
     </div>
   );
