@@ -47,7 +47,7 @@ const SidebarComponent = ({ links }: ISidebarProps) => {
           <Link
             key={index}
             href={link.href}
-            className="flex flex-row block py-2.5 px-4 rounded transition duration-200 hover:bg-indigo-700 hover:text-white"
+            className="flex flex-row py-2.5 px-4 rounded transition duration-200 hover:bg-indigo-700 hover:text-white"
           >
             <Image src={link.src} alt="quests" width={24} height={24} className="ml-4" />
             <span className="px-4">{link.title}</span>
@@ -57,14 +57,14 @@ const SidebarComponent = ({ links }: ISidebarProps) => {
         <div className="mt-4">
           <Link
             href={"/dashboard/help"}
-            className="flex flex-row block py-2.5 px-4 rounded transition duration-200 hover:bg-indigo-700 hover:text-white"
+            className="flex flex-row py-2.5 px-4 rounded transition duration-200 hover:bg-indigo-700 hover:text-white"
           >
             <Image src="/assets/sidebar/help.svg" alt="quests" width={24} height={24} className="ml-4" />
             <span className="px-4">Help</span>
           </Link>
           <Link
             href={"/dashboard/settings"}
-            className="flex flex-row block py-2.5 px-4 rounded transition duration-200 hover:bg-indigo-700 hover:text-white"
+            className="flex flex-row py-2.5 px-4 rounded transition duration-200 hover:bg-indigo-700 hover:text-white"
           >
             <Image src="/assets/sidebar/settings.svg" alt="quests" width={24} height={24} className="ml-4" />
             <span className="px-4">Settings</span>
