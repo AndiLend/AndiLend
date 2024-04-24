@@ -36,12 +36,11 @@ const investorLinks = [
 
 const SidebarComponent = ({ links }: ISidebarProps) => {
   return (
-    <aside className="flex flex-col bg-primary fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 space-y-6 py-7 px-2 ">
+    <aside className="flex flex-col bg-primary fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 space-y-6 py-7 ">
       <Link href="/" className="text-white flex items-center justify-center py-2.5 rounded hover:bg-indigo-700">
         <span className="text-2xl font-extrabold">Andin Lend</span>
       </Link>
-
-      <hr></hr>
+      <hr className="border-black border"></hr>
       <div className="flex-grow">
         {links.map((link, index) => (
           <Link
@@ -53,7 +52,9 @@ const SidebarComponent = ({ links }: ISidebarProps) => {
             <span className="px-4">{link.title}</span>
           </Link>
         ))}
-        <hr className="mt-4"></hr>
+      </div>
+
+      <div className="mt-auto">
         <div className="mt-4">
           <Link
             href={"/dashboard/help"}
@@ -70,11 +71,8 @@ const SidebarComponent = ({ links }: ISidebarProps) => {
             <span className="px-4">Settings</span>
           </Link>
         </div>
-      </div>
-
-      <div className="mt-auto">
-        <hr className="mb-4"></hr>
-        <Link
+        {/* <hr className="mb-4"></hr> */}
+        {/* <Link
           href="/"
           className="flex flex-row w-full mt-auto py-2.5 px-4 rounded transition duration-200 hover:bg-indigo-700 hover:text-white"
         >
@@ -93,7 +91,7 @@ const SidebarComponent = ({ links }: ISidebarProps) => {
             </svg>
           </div>
           <span className="flex items-center w-4/5 px-4">Islam Ali</span>
-        </Link>
+        </Link> */}
       </div>
     </aside>
   );
