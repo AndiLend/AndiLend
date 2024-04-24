@@ -11,7 +11,7 @@ const Quests = () => {
         <div className="flex-auto w-64">
           <FoundingForm />
         </div>
-        <div className="flex-auto w-32 h-dvh bg-neutral ">
+        <div className="flex-auto w-32 h-dvh bg-neutral">
           <CreditScore />
         </div>
       </div>

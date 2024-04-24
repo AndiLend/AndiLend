@@ -2,7 +2,6 @@
 
 import React from "react";
 import HeaderPage from "../Global/HeaderPage";
-import "./Requests.css";
 import { Address } from "viem";
 import { useAccount, useConfig } from "wagmi";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
@@ -136,12 +135,12 @@ const Requests = () => {
   }
 
   return (
-    <div className="main-requests">
+    <div className="p-4 h-full flex flex-col">
       <HeaderPage
         title="Welcome, Juan!"
         description="You can see the request for funding, one of the variables to evaluate is the score"
       />
-      <div className="container-requests container mx-auto p-4">
+      <div className="flex h-full gap-4 pt-4">
         <RequestTable loans={loans} addresses={addresses} />
       </div>
     </div>

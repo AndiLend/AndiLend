@@ -41,7 +41,7 @@ const FoundingForm = () => {
 
   return (
     <form
-      className="lex items-center justify-start h-full w-full flex flex-col bg-neutral gap-12 p-8"
+      className="lex items-center shadow-lg justify-start h-full w-full flex flex-col bg-neutral gap-12 p-8"
       onSubmit={handleSubmit}
     >
       <div className="w-full flex flex-col gap-2">

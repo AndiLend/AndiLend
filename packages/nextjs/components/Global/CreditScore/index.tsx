@@ -6,7 +6,7 @@ const CreditScore = () => {
   console.log(setScoreData);
 
   return (
-    <div className="p-8">
+    <div className="p-8 shadow-lg h-full">
       <h3 className="text-lg font-semibold text-black">Credit Score</h3>
       <div className="max-w-xs mx-auto gap-4 flex">
         <div className="text-center">

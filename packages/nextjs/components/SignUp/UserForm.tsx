@@ -15,7 +15,7 @@ const UserForm = () => {
   return (
     <>
       <form className="flex flex-col justify-center w-3/5" action="#" method="POST">
-        <div className="flex h-4/5 flex-col justify-center gap-8">
+        <div className="flex h-4/5 flex-col justify-center gap-4">
           <div>
             <label htmlFor="national-identity" className="text-sm font-medium text-gray-700">
               National Identity <span className="text-error">*</span>

@@ -87,9 +87,9 @@ const ApprovedTable = () => {
 
 const Approved = () => {
   return (
-    <div className="main-requests">
+    <div className="p-4 h-full flex flex-col">
       <HeaderPage title="Approved Loans" description="You can see all the deposits made it" />
-      <div className="container-requests container mx-auto p-4">
+      <div className="flex h-full gap-4 pt-4">
         <ApprovedTable />
       </div>
     </div>

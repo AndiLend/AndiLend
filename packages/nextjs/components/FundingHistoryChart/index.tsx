@@ -4,7 +4,7 @@ import "./FundingHistoryChart.css";
 
 const FundingHistoryChart = () => {
   return (
-    <div className="bg-white p-8 rounded-xl shadow-lg container-funding-history-chart">
+    <div className="w-full bg-white p-8 rounded-xl shadow-lg container-funding-history-chart">
       <div className="grid grid-cols-3 gap-4 text-center mb-8">
         <div>
           <p className="text-2xl font-bold">$108.00</p>
