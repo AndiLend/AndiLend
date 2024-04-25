@@ -14,7 +14,7 @@ const Footer = () => {
               <FaTwitterSquare size={30} />
               <FaGithubSquare size={30} />
             </div>
-            <div>2024 AndiLending. All rights reserved</div>
+            <div>© 2024 AndiLending. All rights reserved</div>
           </div>
         </div>
 
