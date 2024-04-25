@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const HeroHome = () => {
+const HeroSection = () => {
   return (
     <>
       <div className="z-10 text-white w-full h-screen mx-auto text-center flex flex-row justify-center">
@@ -30,4 +30,4 @@ const HeroHome = () => {
   );
 };
 
-export default HeroHome;
+export default HeroSection;

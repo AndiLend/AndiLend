@@ -1,14 +1,11 @@
 "use client";
 
 import type { NextPage } from "next";
-import CryptoCapHome from "~~/components/Home/CryptoCapHome/CryptoCapHome";
-import FooterHome from "~~/components/Home/FooterHome/FooterHome";
-import HeroHome from "~~/components/Home/HereHome/HeroHome";
+import About from "~~/components/Home/About/About";
+import Footer from "~~/components/Home/Footer/Footer";
+import GettingStarted from "~~/components/Home/GettingStarted/GettingStarted";
+import HeroSection from "~~/components/Home/HeroSection/HeroSection";
 import NavbarHome from "~~/components/Home/NavbarHome/NavbarHome";
-
-// import MarketHome from "~~/components/Home/MarketHome/MarketHome";
-// import AboutHome from "~~/components/Home/AboutHome/AboutHome";
-// import StartHome from "~~/components/Home/StartHome/StartHome";
 
 const Home: NextPage = () => {
   return (
@@ -19,19 +16,24 @@ const Home: NextPage = () => {
       />
 
       <div className="absolute inset-0 bg-primary opacity-95 h-screen " />
+
       <div className="z-1">
         <NavbarHome />
       </div>
+
       <div className="z-1">
-        <HeroHome />
+        <HeroSection />
       </div>
+
       <div className="z-1">
-        <CryptoCapHome />
+        <About />
       </div>
-      {/* <MarketHome /> */}
-      {/* <StartHome /> */}
-      {/* <AboutHome /> */}
-      <FooterHome />
+
+      <div className="z-1">
+        <GettingStarted />
+      </div>
+
+      <Footer />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { FaFacebookSquare, FaGithubSquare, FaInstagram, FaTwitterSquare } from "react-icons/fa";
 
-const FooterHome = () => {
+const Footer = () => {
   return (
     <div className="bg-primary">
       <div className="max-w-[1240px] mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-gray-300 ">
@@ -50,4 +50,4 @@ const FooterHome = () => {
   );
 };
 
-export default FooterHome;
+export default Footer;
