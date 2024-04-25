@@ -58,9 +58,7 @@ const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address |
       <table className="min-w-full divide-y divide-gray-300">
         <thead>
           <tr>
-            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-              #
-            </th>
+            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
               Request Date
             </th>
@@ -78,6 +76,9 @@ const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address |
             </th>
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
               Status
+            </th>
+            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+              Action
             </th>
           </tr>
         </thead>
@@ -141,7 +142,7 @@ const Payments = () => {
   }
 
   return (
-    <div className="main">
+    <div className="p-4 h-full flex flex-col">
       <HeaderPage title="Payments" description="Your history" />
       <div className="container-payments container mx-auto p-4">
         <LoanTable loan={formattedLoan} lender={lender} />

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface IScore {
   title: string;
   value: number;
@@ -7,11 +9,9 @@ const Score = ({ title, value }: IScore) => {
   const angleDegrees = value * 1.8 - 180; // map data 0-100 a -90 to 90 degrees
   const angleRadians = angleDegrees * (Math.PI / 180); // degrees to radians
 
-  const radius = 9.3;
+  const radius = 9.5;
   const xPosition = radius * Math.cos(angleRadians); // Position x in rem
-  const yPosition = radius * Math.sin(angleRadians); // Position y in rem
-
-  console.log(`Rotate: ${angleDegrees} degrees, X: ${xPosition}rem, Y: ${yPosition}rem`);
+  const yPosition = radius * Math.sin(angleRadians) + 0.5; // Position y in rem
 
   return (
     <div className="flex justify-center items-end">
@@ -21,7 +21,7 @@ const Score = ({ title, value }: IScore) => {
           transform: `translateX(${xPosition}rem) translateY(${yPosition}rem)`,
         }}
       ></div>
-      <img src={"/assets/score.svg"} alt="quests" className="w-full h-full" />
+      <Image src={"/assets/score.svg"} alt="quests" className="w-full h-full" width={10} height={10} />
       <div className="block absolute ">
         <span className="block text-black font-semibold text-3xl mb-1">{value}</span>
         <span className="block text-black font-semibold text-2xl mb-1">{title}</span>

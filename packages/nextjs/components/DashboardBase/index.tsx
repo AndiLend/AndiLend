@@ -12,15 +12,13 @@ import Requests from "../Requests";
 
 export function DashboardBase({ userType, children }: { userType: string; children: JSX.Element }) {
   return (
-    <>
-      <div className="flex">
-        <Sidebar userType={userType} />
-        <div className="flex-1 flex flex-col sm:ml-64">
-          <Navbar />
-          <main className="flex-1 p-6 bg-neutral-content">{children}</main>
-        </div>
+    <div className="flex h-screen">
+      <Sidebar userType={userType} />
+      <div className="flex flex-1 pt-16 flex-col sm:ml-64">
+        <Navbar />
+        <main className="h-full p-6 bg-neutral-content">{children}</main>
       </div>
-    </>
+    </div>
   );
 }
 

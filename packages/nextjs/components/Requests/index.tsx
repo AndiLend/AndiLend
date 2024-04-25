@@ -2,7 +2,6 @@
 
 import React from "react";
 import HeaderPage from "../Global/HeaderPage";
-import "./Requests.css";
 import { Address } from "viem";
 import { useAccount, useConfig } from "wagmi";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
@@ -61,12 +60,10 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
 
   return (
     <div className="overflow-hidden ring-1 ring-white ring-opacity-5 md:rounded-lg w-full">
-      <table className="min-w-full divide-y divide-gray-300">
+      <table className="min-w-full divide-y divide-gray-300 table-auto bg-white">
         <thead>
           <tr>
-            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-              #
-            </th>
+            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
               Request Date
             </th>
@@ -80,13 +77,13 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
               Amount
             </th>
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-              %Interest
+              % Interest
             </th>
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
               Period
             </th>
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-              Requests
+              Actions
             </th>
           </tr>
         </thead>
@@ -108,7 +105,7 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
                   <button
-                    className="bg-[#7B61E4] text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg"
+                    className="bg-secondary text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg"
                     onClick={() => {
                       onApprove(loan, addresses[id]);
                     }}
@@ -120,6 +117,26 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
               </tr>
             );
           })}
+          {/* dummy data */}
+          {/* <tr key={"2"}>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">1</td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+              {new Date().toLocaleDateString("en-GB")}
+            </td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">0xE1e5dcbBa</td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">Medium</td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">$3,550</td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">5.4%</td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">12 months</td>
+            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+              <button
+                className="bg-secondary text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg"
+                disabled={isPending || isPendingERC20}
+              >
+                Approve
+              </button>
+            </td>
+          </tr> */}
         </tbody>
       </table>
     </div>
@@ -138,12 +155,12 @@ const Requests = () => {
   }
 
   return (
-    <div className="main-requests">
+    <div className="p-4 h-full flex flex-col">
       <HeaderPage
         title="Welcome, Juan!"
         description="You can see the request for funding, one of the variables to evaluate is the score"
       />
-      <div className="container-requests container mx-auto p-4">
+      <div className="flex h-full gap-4 pt-4">
         <RequestTable loans={loans} addresses={addresses} />
       </div>
     </div>
