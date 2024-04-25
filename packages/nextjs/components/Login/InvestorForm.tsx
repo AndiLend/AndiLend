@@ -15,6 +15,21 @@ const InvestorForm = () => {
 
   return (
     <>
+      <div className="flex justify-between w-3/5">
+        <Link
+          href="/login/user"
+          className="text-[30px]  text-center text-primary underline underline-offset-8 hover:text-indigo-700"
+        >
+          Login as user
+        </Link>
+        <Link
+          href="/login/investor"
+          className="text-[30px] font-bold text-center text-primary underline underline-offset-8 hover:text-indigo-700"
+        >
+          Login investor
+        </Link>
+      </div>
+
       <div className="h-1/4 w-2/4 flex flex-col justify-center">
         <div className="w-full flex justify-center items-center">
           <div>

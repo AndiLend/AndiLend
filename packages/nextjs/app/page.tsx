@@ -13,9 +13,21 @@ import NavbarHome from "~~/components/Home/NavbarHome/NavbarHome";
 const Home: NextPage = () => {
   return (
     <>
-      <NavbarHome />
-      <HeroHome />
-      <CryptoCapHome />
+      <div
+        style={{ backgroundImage: `url(${"/assets/home/homeLP.png"})` }}
+        className="absolute inset-0 bg-center bg-cover w-screen h-screen bg-error z-1"
+      />
+
+      <div className="absolute inset-0 bg-primary opacity-95 h-screen " />
+      <div className="z-1">
+        <NavbarHome />
+      </div>
+      <div className="z-1">
+        <HeroHome />
+      </div>
+      <div className="z-1">
+        <CryptoCapHome />
+      </div>
       {/* <MarketHome /> */}
       {/* <StartHome /> */}
       {/* <AboutHome /> */}

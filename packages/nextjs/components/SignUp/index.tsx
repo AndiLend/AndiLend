@@ -89,8 +89,8 @@ const SignUp = ({ userType }: ILogin) => {
       <div className="flex w-2/4 bg-primary flex-col items-center">
         <ImageSection {...imageProps} />
       </div>
-      <div className="flex w-3/4 flex-col justify-center items-center gap-8">
-        {userType === "investor" ? <InvestorSignUpComponent /> : <UserSinUpComponent></UserSinUpComponent>}
+      <div className="flex w-3/4 flex-col justify-center items-center gap-16">
+        {userType === "investor" ? <InvestorSignUpComponent /> : <UserSinUpComponent />}
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const NavbarHome = () => {
   return (
-    <div className="bg-primary w-full fixed h-24 flex justify-center">
+    <div className="w-full h-24 flex justify-center absolute">
       <ul className=" flex justify-center items-center gap-10 w-2/3">
         <li className="p-4 hover:bg-secondary rounded">Home</li>
         <li className="p-4 hover:bg-secondary rounded">Businesses</li>
@@ -18,7 +18,7 @@ const NavbarHome = () => {
           <option value="PT">PT</option>
         </select>
         <Link href={"/signup/user"}>
-          <button className="bg-secondary w-32 h-10 rounded text-black">LOGIN</button>
+          <button className="bg-secondary w-32 h-10 rounded-md text-black font-medium">Login</button>
         </Link>
       </div>
     </div>
