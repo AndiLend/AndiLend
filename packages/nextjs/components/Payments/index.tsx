@@ -2,7 +2,6 @@
 
 import React from "react";
 import HeaderPage from "../Global/HeaderPage";
-import "./Payments.css";
 import type { Address } from "blo";
 import { useAccount, useConfig } from "wagmi";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";

@@ -16,8 +16,10 @@ const InvestorForm = () => {
   return (
     <>
       <div className="h-1/4 w-2/4 flex flex-col justify-center">
-        <div className="w-full">
-          <RainbowKitCustomConnectButton text="Connect your wallet as investor" />
+        <div className="w-full flex justify-center items-center">
+          <div>
+            <RainbowKitCustomConnectButton text="Connect your wallet as investor" />
+          </div>
           <FaucetButton />
         </div>
       </div>
