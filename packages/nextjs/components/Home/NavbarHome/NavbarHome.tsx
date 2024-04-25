@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const NavbarHome = () => {
   return (
-    <div className="w-full h-24 flex justify-center absolute">
+    <div className="w-full h-24 flex justify-center absolute z-20">
       <ul className=" flex justify-center items-center gap-10 w-2/3">
         <li className="p-4 hover:bg-secondary rounded">Home</li>
         <li className="p-4 hover:bg-secondary rounded">Businesses</li>
