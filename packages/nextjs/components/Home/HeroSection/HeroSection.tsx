@@ -14,7 +14,7 @@ const HeroSection = () => {
           <h1 className="md:text-7xl sm:text-6xl text-4xl font-bold md:py-6 z-10">AndiLending</h1>
           <h1 className="md:text-5xl text-2xl font-bold z-10">Get loans easy and fast!</h1>
           <p className="md:text-3xl text-xl text-gray-400 z-10">A new way to get qualified and get a crypto loan.</p>
-          <Link href={"/login/user"} className="z-10 pt-10 w-full">
+          <Link href={"/signup/user"} className="z-10 pt-10 w-full">
             <button className="bg-secondary w-1/3 rounded-md font-medium my-6 py-4  text-black cursor-pointer">
               Sign Up
             </button>

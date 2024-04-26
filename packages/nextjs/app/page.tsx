@@ -1,5 +1,6 @@
 "use client";
 
+import { RefObject, useRef } from "react";
 import type { NextPage } from "next";
 import About from "~~/components/Home/About/About";
 import Footer from "~~/components/Home/Footer/Footer";
@@ -8,6 +9,14 @@ import HeroSection from "~~/components/Home/HeroSection/HeroSection";
 import NavbarHome from "~~/components/Home/NavbarHome/NavbarHome";
 
 const Home: NextPage = () => {
+  const refsNavbar: RefObject<HTMLDivElement>[] = [useRef(null), useRef(null), useRef(null)];
+
+  const scrollToComponent = (ref: RefObject<HTMLDivElement>) => {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <div
@@ -18,18 +27,18 @@ const Home: NextPage = () => {
       <div className="absolute inset-0 bg-primary opacity-95 h-screen " />
 
       <div className="z-1">
-        <NavbarHome />
+        <NavbarHome scrollToComponent={scrollToComponent} refsNavbar={refsNavbar} />
       </div>
 
-      <div className="z-1">
+      <div className="z-1" ref={refsNavbar[0]}>
         <HeroSection />
       </div>
 
-      <div className="z-1">
+      <div className="z-1" ref={refsNavbar[1]}>
         <About />
       </div>
 
-      <div className="z-1">
+      <div className="z-1" ref={refsNavbar[2]}>
         <GettingStarted />
       </div>
 
