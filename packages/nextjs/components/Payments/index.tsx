@@ -63,8 +63,14 @@ const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address |
   };
 
   let auxLoansFee: Loan[] | undefined = undefined;
-  if (loan?.pendingFeesCount) {
-    console.log(loan);
+  if (loan?.pendingFeesCount !== undefined) {
+    if (loan.pendingFeesCount === 0) {
+      return (
+        <div className="overflow-hidden h-[400px] text-2xl text-bold flex justify-center items-center md:rounded-lg w-full">
+          <h2 className="text-[#88c010]">Congrats! You paid all your debt.</h2>
+        </div>
+      );
+    }
     auxLoansFee = new Array(Number(loan?.pendingFeesCount)).fill(loan);
   }
 
