@@ -60,7 +60,7 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
         }
       }
     } catch (error) {
-      console.log("Pasa causa!");
+      console.error("Error while approving loan:", error);
     }
   };
 

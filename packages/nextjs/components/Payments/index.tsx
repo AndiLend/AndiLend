@@ -4,8 +4,9 @@ import React from "react";
 import HeaderPage from "../Global/HeaderPage";
 import type { Address } from "blo";
 import { useAccount, useConfig } from "wagmi";
+import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
-import { CONTRACT_ADDRESS } from "~~/utils/scaffold-eth/constants";
+import { scaffoldWriteContractVariables } from "~~/utils/scaffold-eth/contract";
 
 type Loan = {
   amount: bigint;
@@ -21,7 +22,7 @@ type Loan = {
 
 const contractName = "AndinLend";
 const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address | undefined }) => {
-  const { address } = useAccount();
+  const { address, chainId } = useAccount();
   const config = useConfig();
   const { writeContractAsync, isPending } = useScaffoldWriteContract(contractName, {
     config: config,
@@ -32,25 +33,40 @@ const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address |
     { config },
   );
   const onPayFee = async () => {
-    if (loan) {
-      await writeContractAsyncERC20(
-        {
-          functionName: "approve",
-          args: [CONTRACT_ADDRESS, loan.amount],
-          account: address,
-        } as never,
-        {
-          onSuccess: async () => {
-            await writeContractAsync({
-              functionName: "payFee",
-              args: [lender],
+    try {
+      if (chainId !== undefined) {
+        if (chainId in deployedContracts) {
+          const contractsInfo = deployedContracts[chainId as keyof typeof deployedContracts];
+          await writeContractAsyncERC20(
+            {
+              functionName: "approve",
+              args: [contractsInfo.AndinLend.address, loan?.fee],
               account: address,
-            } as never);
-          },
-        },
-      );
+            } as scaffoldWriteContractVariables<"USDTMock", "approve">,
+            {
+              onSuccess: async txnReceipt => {
+                console.log("📦 Transaction blockHash", txnReceipt);
+                console.log("==> loan = ", loan, " ==> address = ", address);
+                await writeContractAsync({
+                  functionName: "payFee",
+                  args: [lender],
+                  account: address,
+                } as scaffoldWriteContractVariables<"AndinLend", "payFee">);
+              },
+            },
+          );
+        }
+      }
+    } catch (error) {
+      console.error("Error while paying loan:", error);
     }
   };
+
+  let auxLoansFee: Loan[] | undefined = undefined;
+  if (loan?.pendingFeesCount) {
+    console.log(loan);
+    auxLoansFee = new Array(Number(loan?.pendingFeesCount)).fill(loan);
+  }
 
   return (
     <div className="overflow-hidden ring-1 ring-white ring-opacity-5 md:rounded-lg w-full">
@@ -62,19 +78,16 @@ const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address |
               Request Date
             </th>
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-              Amount
+              Total received
+            </th>
+            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+              Fee amount
             </th>
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
               % Interest
             </th>
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-              Total
-            </th>
-            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-              Pay Day
-            </th>
-            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-              Status
+              Residue
             </th>
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
               Action
@@ -83,28 +96,31 @@ const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address |
         </thead>
 
         <tbody className="divide-y divide-gray-200 bg-white">
-          <tr>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">1</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-              {new Date().toLocaleDateString("en-GB")}
-            </td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{lender}</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan?.creditScore}</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{Number(loan?.amount)}</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan?.interest}%</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-              {Number(loan?.loanTime) / 2_628_000} months
-            </td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-              <button
-                className="bg-[#7B61E4] text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg"
-                onClick={onPayFee}
-                disabled={isPending || isPendingERC20}
-              >
-                Pay Fee
-              </button>
-            </td>
-          </tr>
+          {auxLoansFee?.map((auxLoan, index) => (
+            <tr key={index}>
+              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{index + 1}</td>
+              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                {new Date().toLocaleDateString("en-GB")}
+              </td>
+              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                {loan?.amount !== undefined ? Number(loan?.amount) : ""} USDT
+              </td>
+              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{Number(loan?.fee)} USDT</td>
+              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{Number(loan?.interest)}%</td>
+              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                {loan?.fee ? Number(loan?.fee * BigInt(loan?.pendingFeesCount)) : ""} USDT
+              </td>
+              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                <button
+                  className="bg-[#7B61E4] text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg"
+                  onClick={onPayFee}
+                  disabled={isPending || isPendingERC20}
+                >
+                  Pay Fee
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
