@@ -73,9 +73,13 @@ const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address |
     }
     auxLoansFee = new Array(Number(loan?.pendingFeesCount)).fill(loan);
   }
-
   return (
     <div className="overflow-hidden ring-1 ring-white ring-opacity-5 md:rounded-lg w-full">
+      {loan?.status === 0 && (
+        <div className="flex justify-center items-center md:rounded-lg w-full">
+          <h2 className="text-error text-2xl text-bold">Wait to receive your loan for more information.</h2>
+        </div>
+      )}
       <table className="min-w-full divide-y divide-gray-300">
         <thead>
           <tr>
@@ -118,9 +122,9 @@ const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address |
               </td>
               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
                 <button
-                  className="bg-[#7B61E4] text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg"
+                  className="bg-[#7B61E4] text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg disabled:opacity-30"
                   onClick={onPayFee}
-                  disabled={isPending || isPendingERC20}
+                  disabled={isPending || isPendingERC20 || loan?.status === 0}
                 >
                   Pay Fee
                 </button>

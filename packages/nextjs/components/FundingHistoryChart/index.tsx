@@ -6,9 +6,17 @@ interface IFundingHistoryChart {
   fundingReceived: string;
   interest: string;
   totalPayment: string;
+  feeCounts: string;
+  isPending: boolean;
 }
 
-const FundingHistoryChart = ({ fundingReceived, interest, totalPayment }: IFundingHistoryChart) => {
+const FundingHistoryChart = ({
+  fundingReceived,
+  interest,
+  totalPayment,
+  feeCounts,
+  isPending,
+}: IFundingHistoryChart) => {
   return (
     <div className="w-full bg-white p-8 rounded-xl shadow-lg text-black">
       <div className="grid grid-cols-3 gap-4 text-center mb-8">
@@ -28,15 +36,27 @@ const FundingHistoryChart = ({ fundingReceived, interest, totalPayment }: IFundi
           <p className="text-gray-500">to return in 3 months</p>
         </div>
       </div>
-      <div>
-        <h2 className="text-xl font-semibold mb-4">Funding History</h2>
-        {/* <Line data={data} /> */}
-        {/* <Image src="/assets/chart.png" width={758} height={295} alt="greed" /> */}
-      </div>
-      <p className="text-gray-600 mt-6">
-        You have received ${fundingReceived} USDT and you must pay it in 3 months, so keep the date in mind to have a
-        good credit history.
-      </p>
+      {/* <div>
+        <Line data={data} />
+        <Image src="/assets/chart.png" width={758} height={295} alt="greed" />
+      </div> */}
+      {isPending ? (
+        <div className="flex justify-center items-center md:rounded-lg w-full">
+          <h2 className="text-error text-2xl text-bold">Wait to receive your loan to pay.</h2>
+        </div>
+      ) : feeCounts === "0" ? (
+        <div className="flex justify-center items-center w-full">
+          <h2 className="text-[#88c010] text-2xl text-bold">Congrats! You paid all your debt.</h2>
+        </div>
+      ) : (
+        <>
+          <h2 className="text-xl font-semibold mb-4">Remember</h2>
+          <p className="text-gray-600 mt-6">
+            You have received ${fundingReceived} USDT and you must pay it in {feeCounts} months, so keep the date in
+            mind to have a good credit history.
+          </p>
+        </>
+      )}
     </div>
   );
 };
