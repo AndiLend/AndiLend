@@ -2,10 +2,11 @@
 
 import React from "react";
 import HeaderPage from "../Global/HeaderPage";
-import { Address } from "viem";
+import type { Address } from "blo";
 import { useAccount, useConfig } from "wagmi";
+import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
-import { CONTRACT_ADDRESS } from "~~/utils/scaffold-eth/constants";
+import { scaffoldWriteContractOptions, scaffoldWriteContractVariables } from "~~/utils/scaffold-eth/contract";
 
 type Loan = {
   amount: bigint;
@@ -24,7 +25,7 @@ const contractName = "AndinLend";
 
 const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Address[] }) => {
   const config = useConfig();
-  const { address: userAddress } = useAccount();
+  const { address: userAddress, chainId } = useAccount();
   const { writeContractAsync, isPending } = useScaffoldWriteContract(contractName, {
     config: config,
   });
@@ -35,24 +36,29 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
   );
   const onApprove = async (loan: Loan, address: Address) => {
     try {
-      await writeContractAsyncERC20(
-        {
-          functionName: "approve",
-          args: [CONTRACT_ADDRESS, loan.amount],
-          account: userAddress,
-        } as never,
-        {
-          onSuccess: async txnReceipt => {
-            console.log("📦 Transaction blockHash", txnReceipt);
-            console.log("==> loan = ", loan, " ==> address = ", address);
-            await writeContractAsync({
-              functionName: "grantLoan",
-              args: [address],
+      if (chainId !== undefined) {
+        if (chainId in deployedContracts) {
+          const contractsInfo = deployedContracts[chainId as keyof typeof deployedContracts];
+          await writeContractAsyncERC20(
+            {
+              functionName: "approve",
+              args: [contractsInfo.AndinLend.address, loan.amount * BigInt(1_000_000)],
               account: userAddress,
-            } as never);
-          },
-        },
-      );
+            } as scaffoldWriteContractVariables<"USDTMock", "approve">,
+            {
+              onSuccess: async (txnReceipt: Address) => {
+                console.log("📦 Transaction blockHash", txnReceipt);
+                console.log("==> loan = ", loan, " ==> address = ", address);
+                await writeContractAsync({
+                  functionName: "grantLoan",
+                  args: [address],
+                  account: userAddress,
+                } as scaffoldWriteContractVariables<"AndinLend", "grantLoan">);
+              },
+            } as scaffoldWriteContractOptions,
+          );
+        }
+      }
     } catch (error) {
       console.log("Pasa causa!");
     }
@@ -92,12 +98,12 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
           {loans?.map((loan: Loan, id): React.ReactNode => {
             return loan.amount === 0n ? null : (
               <tr key={id}>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{id}</td>
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{id + 1}</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
                   {new Date().toLocaleDateString("en-GB")}
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{addresses[id]}</td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan.creditScore}</td>
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan?.creditScore}</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">${Number(loan.amount)}</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan.interest}%</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
@@ -111,32 +117,12 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
                     }}
                     disabled={isPending || isPendingERC20}
                   >
-                    Approve
+                    Approve token transfer
                   </button>
                 </td>
               </tr>
             );
           })}
-          {/* dummy data */}
-          {/* <tr key={"2"}>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">1</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-              {new Date().toLocaleDateString("en-GB")}
-            </td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">0xE1e5dcbBa</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">Medium</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">$3,550</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">5.4%</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">12 months</td>
-            <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-              <button
-                className="bg-secondary text-white px-2 text-xs font-semibold leading-5 w-full h-10 rounded-lg"
-                disabled={isPending || isPendingERC20}
-              >
-                Approve
-              </button>
-            </td>
-          </tr> */}
         </tbody>
       </table>
     </div>
