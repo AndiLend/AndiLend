@@ -90,7 +90,7 @@ const Approved = () => {
   const { approvedData } = useApproved();
   return (
     <div className="p-4 h-full flex flex-col">
-      <HeaderPage title="Approved Loans" description="You can see all the deposits made it" />
+      <HeaderPage title="Approved Loans" description="You can see all the deposits you made" />
       <div className="flex h-full gap-4 pt-4">
         <ApprovedTable approvedData={approvedData} />
       </div>

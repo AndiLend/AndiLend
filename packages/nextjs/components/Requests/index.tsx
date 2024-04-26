@@ -147,7 +147,14 @@ const Requests = () => {
         description="You can see the request for funding, one of the variables to evaluate is the score"
       />
       <div className="flex h-full gap-4 pt-4">
-        <RequestTable loans={loans} addresses={addresses} />
+        {loans?.length === 0 ? (
+          <div className="h-[400px] flex justify-center items-center md:rounded-lg w-full">
+            <h2 className="text-black text-2xl text-bold">Oops! No loans for the moment.</h2>
+            <p className="text-center">Wait for new loans to be added</p>
+          </div>
+        ) : (
+          <RequestTable loans={loans} addresses={addresses} />
+        )}
       </div>
     </div>
   );
