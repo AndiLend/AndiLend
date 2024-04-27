@@ -123,6 +123,7 @@ const UserForm = () => {
             className="bg-secondary text-black px-16 py-3 rounded hover:bg-primary hover:text-white"
             disabled={!address || isPending}
           >
+            {isPending && <span className="loading loading-spinner loading-xs"></span>}
             GET CREDIT SCORE
           </button>
 
