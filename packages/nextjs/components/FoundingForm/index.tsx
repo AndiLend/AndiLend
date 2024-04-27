@@ -27,12 +27,12 @@ const FoundingForm = () => {
       const loanTime = BigInt(numberTime) * BigInt(2_628_000);
       const interest = 14;
       const pendingFeesCount = numberTime;
-      // const creditScore = 2;
-      // const proof = "0x35";
+      const creditScore = 2;
+      const proof = "0x35";
       console.log(amountFinal);
       await writeContractAsync({
         functionName: "requestLoan",
-        args: [amountFinal, loanTime, interest, pendingFeesCount],
+        args: [amountFinal, loanTime, interest, pendingFeesCount, creditScore, proof],
         account: address,
       } as never);
       setAmount("");
@@ -73,7 +73,7 @@ const FoundingForm = () => {
         />
       </div>
       <label htmlFor="national-identity" className="w-full text-sm font-medium text-gray-700">
-        Your Interest estimated is: 5.1%
+        The actual interest rate is 14% monthly.
       </label>
       <div className="flex flex-col gap-2 w-2/4">
         <button
