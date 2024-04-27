@@ -1,5 +1,5 @@
 const useQuests = () => {
-  const scoreData = 20;
+  const scoreData = 500;
   return { scoreData };
 };
 

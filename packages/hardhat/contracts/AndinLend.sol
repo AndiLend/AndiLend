@@ -15,15 +15,15 @@ contract AndinLend {
 		uint loanTime;
 		uint fee;
 		uint8 interest;
-		uint8 creditScore;
+		uint8 qualification;
 		uint8 pendingFeesCount;
 		uint8 status;
-		bytes proof;
 	}
 
 	mapping(address => Loan) public loans;
 	mapping(address => address) private borrowerToLender;
 	mapping(address => address[]) private lenderToBorrowers;
+	mapping(address => uint8) public borrowerQualification;
 	address[] private borrowersRegister;
 
 	event RequestedLoan(address borrower, Loan loan);
@@ -44,9 +44,7 @@ contract AndinLend {
 		uint _amount,
 		uint _loanTime,
 		uint8 _interest,
-		uint8 _pendingFeesCount,
-		uint8 _creditScore,
-		bytes memory _proof
+		uint8 _pendingFeesCount
 	) external {
 		require(
 			loans[msg.sender].loanTime == 0 || loans[msg.sender].status == 2,
@@ -55,16 +53,16 @@ contract AndinLend {
 		uint dueWeeks = _loanTime / 604800;
 		uint balanceDue = ((_interest * dueWeeks * _amount) / 100) + _amount;
 		uint fee = balanceDue / _pendingFeesCount;
+		uint8 qualification = borrowerQualification[msg.sender];
 		Loan memory newLoanRequest = Loan(
 			_amount,
 			balanceDue,
 			_loanTime,
 			fee,
 			_interest,
-			_creditScore,
+			qualification,
 			_pendingFeesCount,
-			uint8(0),
-			_proof
+			uint8(0)
 		);
 		if (loans[msg.sender].status != 2) {
 			borrowersRegister.push(msg.sender);
@@ -173,5 +171,9 @@ contract AndinLend {
 			}
 		}
 		return (pendingLoans, borrowersRegister);
+	}
+
+	function addBorrowerQualification(address _borrower, uint8 _qualification) external {
+		borrowerQualification[_borrower] = _qualification;
 	}
 }

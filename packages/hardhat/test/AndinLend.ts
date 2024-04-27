@@ -36,17 +36,8 @@ describe("AndinLend", function () {
       const loanTime = (121 * 10 ** 4).toString();
       const interest = (14).toString();
       const pendingFeesCount = (2).toString();
-      const creditScore = (2).toString();
-      const proof = (1).toString();
       const andinLendAccount1 = andinLend.connect(account1);
-      await andinLendAccount1.requestLoan(
-        amount,
-        loanTime,
-        interest,
-        pendingFeesCount,
-        creditScore,
-        ethers.toUtf8Bytes(proof),
-      );
+      await andinLendAccount1.requestLoan(amount, loanTime, interest, pendingFeesCount);
       const loanAccount1 = await andinLend.loans(await account1.getAddress());
       expect(loanAccount1[1]).to.be.equal(64000000n);
     });
