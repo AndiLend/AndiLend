@@ -33,7 +33,7 @@ const FundingHistoryChart = ({
         <div>
           <p className="text-gray-500">Total Payment</p>
           <p className="text-2xl font-bold">${totalPayment}</p>
-          <p className="text-gray-500">to return in 3 months</p>
+          <p className="text-gray-500">to return in {feeCounts} months</p>
         </div>
       </div>
       {/* <div>

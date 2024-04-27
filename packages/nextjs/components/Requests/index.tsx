@@ -8,7 +8,7 @@ import deployedContracts from "~~/contracts/deployedContracts";
 import { useScaffoldReadContract, useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
 import { scaffoldWriteContractOptions, scaffoldWriteContractVariables } from "~~/utils/scaffold-eth/contract";
 
-type Loan = {
+export type Loan = {
   amount: bigint;
   balanceDue: bigint;
   loanTime: bigint;
@@ -42,7 +42,7 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
           await writeContractAsyncERC20(
             {
               functionName: "approve",
-              args: [contractsInfo.AndinLend.address, loan.amount * BigInt(1_000_000)],
+              args: [contractsInfo.AndinLend.address, loan.amount],
               account: userAddress,
             } as scaffoldWriteContractVariables<"USDTMock", "approve">,
             {
@@ -104,7 +104,9 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{addresses[id]}</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan?.creditScore}</td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">${Number(loan.amount)}</td>
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                  ${Number(loan.amount) / 1_000_000}
+                </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan.interest}%</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
                   {Number(loan.loanTime) / 2_628_000} months

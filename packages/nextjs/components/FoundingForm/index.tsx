@@ -23,12 +23,13 @@ const FoundingForm = () => {
     event.preventDefault();
     if (address) {
       const numberTime = Number(time);
-      const amountFinal = BigInt(amount);
-      const loanTime = BigInt(numberTime) * BigInt(2628000);
+      const amountFinal = BigInt(amount) * BigInt(1_000_000);
+      const loanTime = BigInt(numberTime) * BigInt(2_628_000);
       const interest = 14;
       const pendingFeesCount = numberTime;
       const creditScore = 2;
       const proof = "0x35";
+      console.log(amountFinal);
       await writeContractAsync({
         functionName: "requestLoan",
         args: [amountFinal, loanTime, interest, pendingFeesCount, creditScore, proof],

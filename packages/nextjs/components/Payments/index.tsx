@@ -84,9 +84,9 @@ const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address |
         <thead>
           <tr>
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>
-            <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+            {/* <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
               Request Date
-            </th>
+            </th> */}
             <th scope="col" className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
               Total received
             </th>
@@ -109,16 +109,18 @@ const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address |
           {auxLoansFee?.map((auxLoan, index) => (
             <tr key={index}>
               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{index + 1}</td>
-              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+              {/* <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
                 {new Date().toLocaleDateString("en-GB")}
+              </td> */}
+              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                {loan?.amount !== undefined ? Number(loan?.amount) / 1_000_000 : ""} USDT
               </td>
               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                {loan?.amount !== undefined ? Number(loan?.amount) : ""} USDT
+                {Number(loan?.fee) / 1_000_000} USDT
               </td>
-              <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{Number(loan?.fee)} USDT</td>
               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{Number(loan?.interest)}%</td>
               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                {loan?.fee ? Number(loan?.fee * BigInt(loan?.pendingFeesCount)) : ""} USDT
+                {loan?.fee ? Number((loan?.fee * BigInt(loan?.pendingFeesCount - index)) / BigInt(1_000_000)) : ""} USDT
               </td>
               <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
                 <button

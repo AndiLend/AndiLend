@@ -11,9 +11,9 @@ const useDeposits = () => {
     args: [address],
   });
   const scoreData = 100;
-  const fundingReceived = loan ? Number(loan[0]) : "100";
+  const fundingReceived = loan ? Number(loan[0]) / 1_000_000 : "100";
   const interest = loan ? Number(loan[4]) : "14%";
-  const totalPayment = loan ? Number(loan[1]) : "114";
+  const totalPayment = loan ? Number(loan[1]) / 1_000_000 : "114";
   const feeCounts = loan ? Number(loan[6]) : "3";
   const isPending = loan ? loan[7] === 0 : false;
 
