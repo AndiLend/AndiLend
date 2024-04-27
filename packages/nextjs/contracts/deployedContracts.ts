@@ -1087,6 +1087,1098 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
   },
+  421614: {
+    AndinLend: {
+      address: "0xF9C619d863e7838730288C3fbc829658CaFc462c",
+      abi: [
+        {
+          inputs: [],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "address",
+              name: "borrower",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "address",
+              name: "lender",
+              type: "address",
+            },
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "balanceDue",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "loanTime",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "fee",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "interest",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "qualification",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "pendingFeesCount",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "status",
+                  type: "uint8",
+                },
+              ],
+              indexed: false,
+              internalType: "struct AndinLend.Loan",
+              name: "loan",
+              type: "tuple",
+            },
+          ],
+          name: "FinishLoan",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "address",
+              name: "borrower",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "address",
+              name: "lender",
+              type: "address",
+            },
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "balanceDue",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "loanTime",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "fee",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "interest",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "qualification",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "pendingFeesCount",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "status",
+                  type: "uint8",
+                },
+              ],
+              indexed: false,
+              internalType: "struct AndinLend.Loan",
+              name: "loan",
+              type: "tuple",
+            },
+          ],
+          name: "GrantedLoan",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "address",
+              name: "borrower",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "address",
+              name: "lender",
+              type: "address",
+            },
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "balanceDue",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "loanTime",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "fee",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "interest",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "qualification",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "pendingFeesCount",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "status",
+                  type: "uint8",
+                },
+              ],
+              indexed: false,
+              internalType: "struct AndinLend.Loan",
+              name: "loan",
+              type: "tuple",
+            },
+          ],
+          name: "PaidFee",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "address",
+              name: "borrower",
+              type: "address",
+            },
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "balanceDue",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "loanTime",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "fee",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "interest",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "qualification",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "pendingFeesCount",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "status",
+                  type: "uint8",
+                },
+              ],
+              indexed: false,
+              internalType: "struct AndinLend.Loan",
+              name: "loan",
+              type: "tuple",
+            },
+          ],
+          name: "RequestedLoan",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_borrower",
+              type: "address",
+            },
+            {
+              internalType: "uint8",
+              name: "_qualification",
+              type: "uint8",
+            },
+          ],
+          name: "addBorrowerQualification",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          name: "borrowerQualification",
+          outputs: [
+            {
+              internalType: "uint8",
+              name: "",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "erc20USDTAddress",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllLoans",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "balanceDue",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "loanTime",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "fee",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "interest",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "qualification",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "pendingFeesCount",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "status",
+                  type: "uint8",
+                },
+              ],
+              internalType: "struct AndinLend.Loan[]",
+              name: "",
+              type: "tuple[]",
+            },
+            {
+              internalType: "address[]",
+              name: "",
+              type: "address[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllPendingLoans",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "balanceDue",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "loanTime",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "fee",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "interest",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "qualification",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "pendingFeesCount",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "status",
+                  type: "uint8",
+                },
+              ],
+              internalType: "struct AndinLend.Loan[]",
+              name: "",
+              type: "tuple[]",
+            },
+            {
+              internalType: "address[]",
+              name: "",
+              type: "address[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_borrower",
+              type: "address",
+            },
+          ],
+          name: "getLenderByBorrowerAddress",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_lender",
+              type: "address",
+            },
+          ],
+          name: "getLoansByLend",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "balanceDue",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "loanTime",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "fee",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "interest",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "qualification",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "pendingFeesCount",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "status",
+                  type: "uint8",
+                },
+              ],
+              internalType: "struct AndinLend.Loan[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_borrower",
+              type: "address",
+            },
+          ],
+          name: "grantLoan",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          name: "loans",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "balanceDue",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "loanTime",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "fee",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "interest",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "qualification",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "pendingFeesCount",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "status",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "owner",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_lender",
+              type: "address",
+            },
+          ],
+          name: "payFee",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "_amount",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "_loanTime",
+              type: "uint256",
+            },
+            {
+              internalType: "uint8",
+              name: "_interest",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "_pendingFeesCount",
+              type: "uint8",
+            },
+            {
+              internalType: "uint8",
+              name: "_creditScore",
+              type: "uint8",
+            },
+            {
+              internalType: "bytes",
+              name: "_proof",
+              type: "bytes",
+            },
+          ],
+          name: "requestLoan",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_erc20USDTAddress",
+              type: "address",
+            },
+          ],
+          name: "setERC20ContractAddress",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+    USDTMock: {
+      address: "0x36BfA555569956955380070F7163ecB32950134C",
+      abi: [
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "initialSupply",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "owner",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "value",
+              type: "uint256",
+            },
+          ],
+          name: "Approval",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: true,
+              internalType: "address",
+              name: "from",
+              type: "address",
+            },
+            {
+              indexed: true,
+              internalType: "address",
+              name: "to",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "value",
+              type: "uint256",
+            },
+          ],
+          name: "Transfer",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "owner",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+          ],
+          name: "allowance",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "approve",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "account",
+              type: "address",
+            },
+          ],
+          name: "balanceOf",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "decimals",
+          outputs: [
+            {
+              internalType: "uint8",
+              name: "",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "pure",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "subtractedValue",
+              type: "uint256",
+            },
+          ],
+          name: "decreaseAllowance",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "spender",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "addedValue",
+              type: "uint256",
+            },
+          ],
+          name: "increaseAllowance",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "name",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "symbol",
+          outputs: [
+            {
+              internalType: "string",
+              name: "",
+              type: "string",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "totalSupply",
+          outputs: [
+            {
+              internalType: "uint256",
+              name: "",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "to",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "transfer",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "from",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "to",
+              type: "address",
+            },
+            {
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "transferFrom",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {
+        allowance: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        approve: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        balanceOf: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        decimals: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        decreaseAllowance: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        increaseAllowance: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        name: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        symbol: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        totalSupply: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        transfer: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        transferFrom: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+      },
+    },
+    UltraVerifier: {
+      address: "0x9899698f9D43C816dBa1c3a626eD4206f46d4E19",
+      abi: [
+        {
+          inputs: [],
+          name: "EC_SCALAR_MUL_FAILURE",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "MOD_EXP_FAILURE",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "PROOF_FAILURE",
+          type: "error",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "expected",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "actual",
+              type: "uint256",
+            },
+          ],
+          name: "PUBLIC_INPUT_COUNT_INVALID",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "PUBLIC_INPUT_GE_P",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "PUBLIC_INPUT_INVALID_BN128_G1_POINT",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "getVerificationKeyHash",
+          outputs: [
+            {
+              internalType: "bytes32",
+              name: "",
+              type: "bytes32",
+            },
+          ],
+          stateMutability: "pure",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes",
+              name: "_proof",
+              type: "bytes",
+            },
+            {
+              internalType: "bytes32[]",
+              name: "_publicInputs",
+              type: "bytes32[]",
+            },
+          ],
+          name: "verify",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+    ZkCreditScoreVerifier: {
+      address: "0xd0fB3F0440eef72547fB0cfd4082D248ab8dc86f",
+      abi: [
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "ultraVerifierAddress",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "andinLendAddress",
+              type: "address",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes",
+              name: "_proof",
+              type: "bytes",
+            },
+            {
+              internalType: "bytes32[]",
+              name: "_publicInputs",
+              type: "bytes32[]",
+            },
+          ],
+          name: "sendProof",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+  },
   534351: {
     AndinLend: {
       address: "0xd0fB3F0440eef72547fB0cfd4082D248ab8dc86f",
