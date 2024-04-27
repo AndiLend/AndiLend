@@ -17,36 +17,16 @@ After installing the packages, you should run the local hardhat node with:
 yarn run chain
 ```
 
-After running the node, you need to deploy the smart contract with an ERC20 to mock the interaction of the main contract.
+After running the node, you need to deploy all the smart contracts with:
 
 ```bash
-yarn deploy --tags USDTMock --network localhost
+yarn deploy
 ```
 
-Then you have to copy the ERC20 contract address to the file `01_deploy_AndiLend.ts` like this:
-
-```tsx
-await deploy("AndinLend", {
-  from: deployer,
-  // USDT Mock contract address
-  args: ["0x5FbDB2315678afecb367f032d93F642f64180aa3"],
-  log: true,
-  autoMine: true,
-});
-```
-
-It’s important to do this before deploying the main smart contract. Because we need the direct connection with the ERC20 token that’s meant to be the token for the loan.
-
-To deploy the main contract run:
+Then you have to add the ERC20 contract address to the AndinLend contract with the wallet that deployed the contracts. To do that, run the script `addERC20ToContract.ts` with:
 
 ```bash
-yarn deploy --tags AndinLend --network scrollSepolia
-```
-
-To generate the ABIs run:
-
-```bash
-yarn deploy --tags generateTsAbis --network localhost
+yarn run addToken
 ```
 
 After that, it’s possible to start the Next.js project with:
