@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import circuit from "../../../zk_credit_score/target/zk_credit_score.json";
+import circuit from "../../zk_credit_score.json";
 import { BarretenbergBackend } from "@noir-lang/backend_barretenberg";
 import { Noir } from "@noir-lang/noir_js";
 import { Buffer } from "buffer";
