@@ -122,16 +122,16 @@ const config: HardhatUserConfig = {
   // configuration for harhdat-verify plugin
   etherscan: {
     apiKey: {
-      scrollSepolia: `${etherscanApiKey}`,
-      scroll: `${etherscanApiKey}`,
+      arbitrumSepolia: `${etherscanApiKey}`,
+      arbitrum: `${etherscanApiKey}`,
     },
     customChains: [
       {
-        network: "scrollSepolia",
-        chainId: 534351,
+        network: "arbitrumSepolia",
+        chainId: 421614,
         urls: {
-          apiURL: "https://api-sepolia.scrollscan.com/api",
-          browserURL: "https://sepolia.scrollscan.com/",
+          apiURL: "https://api-sepolia.arbiscan.io/api",
+          browserURL: "https://sepolia.arbiscan.io/",
         },
       },
     ],

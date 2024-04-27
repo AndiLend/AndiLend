@@ -641,6 +641,16 @@ const deployedContracts = {
               name: "_pendingFeesCount",
               type: "uint8",
             },
+            {
+              internalType: "uint8",
+              name: "_creditScore",
+              type: "uint8",
+            },
+            {
+              internalType: "bytes",
+              name: "_proof",
+              type: "bytes",
+            },
           ],
           name: "requestLoan",
           outputs: [],
@@ -1089,7 +1099,7 @@ const deployedContracts = {
   },
   421614: {
     AndinLend: {
-      address: "0xF9C619d863e7838730288C3fbc829658CaFc462c",
+      address: "0xaD71DC80911e819796C1Fe1dd846c50B53F857D8",
       abi: [
         {
           inputs: [],
@@ -1723,16 +1733,6 @@ const deployedContracts = {
               name: "_pendingFeesCount",
               type: "uint8",
             },
-            {
-              internalType: "uint8",
-              name: "_creditScore",
-              type: "uint8",
-            },
-            {
-              internalType: "bytes",
-              name: "_proof",
-              type: "bytes",
-            },
           ],
           name: "requestLoan",
           outputs: [],
@@ -2139,7 +2139,7 @@ const deployedContracts = {
       inheritedFunctions: {},
     },
     ZkCreditScoreVerifier: {
-      address: "0xd0fB3F0440eef72547fB0cfd4082D248ab8dc86f",
+      address: "0x0Fe23961eed70604397e0c4a4F5F181f6D321539",
       abi: [
         {
           inputs: [

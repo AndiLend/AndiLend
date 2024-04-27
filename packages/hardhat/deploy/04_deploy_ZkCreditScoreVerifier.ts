@@ -24,7 +24,7 @@ const deployZkCreditScoreVerifier: DeployFunction = async function (hre: Hardhat
 
   await deploy("ZkCreditScoreVerifier", {
     from: deployer,
-    args: ["0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9", "0x5FbDB2315678afecb367f032d93F642f64180aa3"],
+    args: ["0xd0fB3F0440eef72547fB0cfd4082D248ab8dc86f", "0xaD71DC80911e819796C1Fe1dd846c50B53F857D8"],
     log: true,
     autoMine: true,
   });

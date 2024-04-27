@@ -2,6 +2,15 @@
 
 ## SMART CONTRACTS LINKS
 
+### Arbitrum Sepolia
+
+- [AndinLend.sol](https://sepolia.arbiscan.io/address/0xaD71DC80911e819796C1Fe1dd846c50B53F857D8)
+- [USDTMock.sol](https://sepolia.arbiscan.io/address/0x36BfA555569956955380070F7163ecB32950134C)
+- [UltraVerifier.sol](https://sepolia.arbiscan.io/address/0x9899698f9D43C816dBa1c3a626eD4206f46d4E19)
+- [ZkCreditScoreVerifier.sol](https://sepolia.arbiscan.io/address/0x0Fe23961eed70604397e0c4a4F5F181f6D321539)
+
+### ScrollSepolia
+
 - [AndinLend.sol](https://sepolia.scrollscan.com/address/0xd0fB3F0440eef72547fB0cfd4082D248ab8dc86f#code)
 - [USDTMock.sol](https://sepolia.scrollscan.com/address/0xF9C619d863e7838730288C3fbc829658CaFc462c)
 
