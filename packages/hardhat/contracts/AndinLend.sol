@@ -15,15 +15,15 @@ contract AndinLend {
 		uint loanTime;
 		uint fee;
 		uint8 interest;
-		uint8 creditScore;
+		uint8 qualification;
 		uint8 pendingFeesCount;
 		uint8 status;
-		bytes proof;
 	}
 
 	mapping(address => Loan) public loans;
 	mapping(address => address) private borrowerToLender;
 	mapping(address => address[]) private lenderToBorrowers;
+	mapping(address => uint8) public borrowerQualification;
 	address[] private borrowersRegister;
 
 	event RequestedLoan(address borrower, Loan loan);
@@ -69,16 +69,16 @@ contract AndinLend {
 		uint dueMonths = _loanTime / 2628000;
 		uint balanceDue = ((_interest * dueMonths * _amount) / 100) + _amount;
 		uint fee = balanceDue / _pendingFeesCount;
+		uint8 qualification = borrowerQualification[msg.sender];
 		Loan memory newLoanRequest = Loan(
 			_amount,
 			balanceDue,
 			_loanTime,
 			fee,
 			_interest,
-			_creditScore,
+			qualification,
 			_pendingFeesCount,
-			uint8(0),
-			_proof
+			uint8(0)
 		);
 		if (loans[msg.sender].status != 2) {
 			borrowersRegister.push(msg.sender);
@@ -191,6 +191,13 @@ contract AndinLend {
 			}
 		}
 		return (pendingLoans, borrowersRegister);
+	}
+
+	function addBorrowerQualification(
+		address _borrower,
+		uint8 _qualification
+	) external {
+		borrowerQualification[_borrower] = _qualification;
 	}
 
 	modifier isERC20AddedModifier() {

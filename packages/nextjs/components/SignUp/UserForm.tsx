@@ -3,18 +3,68 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import circuit from "../../../zk_credit_score/target/zk_credit_score.json";
+import { BarretenbergBackend } from "@noir-lang/backend_barretenberg";
+import { Noir } from "@noir-lang/noir_js";
+import { Address } from "viem";
+import { useAccount, useConfig } from "wagmi";
+import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
+
+const verifierContract = "ZkCreditScoreVerifier";
 
 const UserForm = () => {
   const router = useRouter();
-  const handleLoginUser = (e: any) => {
+  const { address } = useAccount();
+  const [dni, setDni] = React.useState("");
+  const config = useConfig();
+  const { writeContractAsync, isPending } = useScaffoldWriteContract(verifierContract, {
+    config: config,
+  });
+
+  const handleLoginUser = async (e: any) => {
     e.preventDefault();
     localStorage.setItem("rol", "user");
-    router.push("/dashboard/quests", { scroll: false });
+    console.log({ address, dni });
+    // api call to /api/getCreditScore with axios
+    if (typeof address != "string") return;
+    // @ts-ignore
+    const backend = new BarretenbergBackend(circuit);
+    // @ts-ignore
+    const noir = new Noir(circuit, backend);
+    const res = await fetch(
+      "/api/getCreditScore?" +
+        new URLSearchParams({
+          ethAddress: address,
+          dni: dni,
+        }),
+    );
+    const response = await res.json();
+    console.log(response);
+    const { creditScore } = response;
+    const input = {
+      x: creditScore,
+    };
+    const proof = await noir.generateProof(input);
+    console.log({ proof });
+    const hexCreditScore = "0x" + creditScore.toString(16).padStart(64, "0");
+    await writeContractAsync(
+      {
+        functionName: "sendProof",
+        args: [proof, [hexCreditScore]],
+        account: address,
+      } as never,
+      {
+        onSuccess: async (txnReceipt: Address) => {
+          console.log("📦 Transaction blockHash", txnReceipt);
+          router.push("/dashboard/quests", { scroll: false });
+        },
+      },
+    );
   };
 
   return (
     <>
-      <form className="flex flex-col justify-center w-3/5" action="#" method="POST">
+      <form className="flex flex-col justify-center w-3/5" action="#" method="GET">
         <div className="flex h-4/5 flex-col justify-center gap-4">
           <div>
             <label htmlFor="national-identity" className="text-sm font-medium text-gray-700">
@@ -27,6 +77,7 @@ const UserForm = () => {
                 id="national-identity"
                 className="text-black block w-full px-3 py-2 bg-gray-50 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:border-indigo-500 focus:ring-indigo-500"
                 placeholder="0000000005-9"
+                onChange={e => setDni(e.target.value)}
               />
             </div>
           </div>
@@ -64,6 +115,7 @@ const UserForm = () => {
             onClick={handleLoginUser}
             type="submit"
             className="bg-secondary text-black px-16 py-3 rounded hover:bg-primary hover:text-white"
+            disabled={!address || isPending}
           >
             GET CREDIT SCORE
           </button>

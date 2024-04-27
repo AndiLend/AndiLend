@@ -14,10 +14,9 @@ type Loan = {
   loanTime: bigint;
   fee: bigint;
   interest: number;
-  creditScore: number;
+  qualification: number;
   pendingFeesCount: number;
   status: number;
-  proof: Address;
 };
 
 const contractName = "AndinLend";
@@ -161,10 +160,9 @@ const Payments = () => {
       loanTime: loan[2],
       fee: loan[3],
       interest: loan[4],
-      creditScore: loan[5],
+      qualification: loan[5],
       pendingFeesCount: loan[6],
       status: loan[7],
-      proof: loan[8],
     };
   }
 

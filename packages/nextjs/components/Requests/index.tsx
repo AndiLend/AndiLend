@@ -14,10 +14,9 @@ export type Loan = {
   loanTime: bigint;
   fee: bigint;
   interest: number;
-  creditScore: number;
+  qualification: number;
   pendingFeesCount: number;
   status: number;
-  proof: `0x${string}`;
 };
 
 type loansType = readonly Loan[] | undefined;
@@ -103,7 +102,7 @@ const RequestTable = ({ loans, addresses }: { loans: loansType; addresses: Addre
                   {new Date().toLocaleDateString("en-GB")}
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{addresses[id]}</td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan?.creditScore}</td>
+                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">{loan?.qualification}</td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
                   ${Number(loan.amount) / 1_000_000}
                 </td>

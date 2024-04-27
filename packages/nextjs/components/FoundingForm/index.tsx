@@ -27,12 +27,12 @@ const FoundingForm = () => {
       const loanTime = BigInt(numberTime) * BigInt(2_628_000);
       const interest = 14;
       const pendingFeesCount = numberTime;
-      const creditScore = 2;
-      const proof = "0x35";
+      // const creditScore = 2;
+      // const proof = "0x35";
       console.log(amountFinal);
       await writeContractAsync({
         functionName: "requestLoan",
-        args: [amountFinal, loanTime, interest, pendingFeesCount, creditScore, proof],
+        args: [amountFinal, loanTime, interest, pendingFeesCount],
         account: address,
       } as never);
       setAmount("");
