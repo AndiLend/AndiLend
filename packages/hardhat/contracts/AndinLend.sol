@@ -35,9 +35,23 @@ contract AndinLend {
 	event FinishLoan(address borrower, address lender, Loan loan);
 
 	IERC20 private erc20USDT;
+	address public owner;
+	bool private isERC20Added = false;
+	address public erc20USDTAddress;
 
-	constructor(address _erc20USDTAddress) {
+	constructor() {
+		owner = msg.sender;
+	}
+
+	function setERC20ContractAddress(address _erc20USDTAddress) external {
+		require(isERC20Added == false, "Contract address is already added.");
+		require(
+			msg.sender == owner,
+			"Only owner can modify the ERC20 Address."
+		);
 		erc20USDT = IERC20(_erc20USDTAddress);
+		isERC20Added = true;
+		erc20USDTAddress = _erc20USDTAddress;
 	}
 
 	function requestLoan(
@@ -47,13 +61,13 @@ contract AndinLend {
 		uint8 _pendingFeesCount,
 		uint8 _creditScore,
 		bytes memory _proof
-	) external {
+	) external isERC20AddedModifier {
 		require(
 			loans[msg.sender].loanTime == 0 || loans[msg.sender].status == 2,
 			"Each user can only have one active loan."
 		);
-		uint dueWeeks = _loanTime / 604800;
-		uint balanceDue = ((_interest * dueWeeks * _amount) / 100) + _amount;
+		uint dueMonths = _loanTime / 2628000;
+		uint balanceDue = ((_interest * dueMonths * _amount) / 100) + _amount;
 		uint fee = balanceDue / _pendingFeesCount;
 		Loan memory newLoanRequest = Loan(
 			_amount,
@@ -73,7 +87,7 @@ contract AndinLend {
 		emit RequestedLoan(msg.sender, newLoanRequest);
 	}
 
-	function grantLoan(address _borrower) public {
+	function grantLoan(address _borrower) external isERC20AddedModifier {
 		require(
 			loans[_borrower].loanTime != 0,
 			"The client does not have a loan requirement"
@@ -96,7 +110,7 @@ contract AndinLend {
 		emit GrantedLoan(_borrower, msg.sender, loans[_borrower]);
 	}
 
-	function payFee(address _lender) external {
+	function payFee(address _lender) external isERC20AddedModifier {
 		require(
 			loans[msg.sender].loanTime != 0,
 			"Client does not have an active loan."
@@ -164,7 +178,11 @@ contract AndinLend {
 	}
 
 	// get all loans with status = 0
-	function getAllPendingLoans() external view returns (Loan[] memory, address[] memory) {
+	function getAllPendingLoans()
+		external
+		view
+		returns (Loan[] memory, address[] memory)
+	{
 		Loan[] memory pendingLoans = new Loan[](borrowersRegister.length);
 		for (uint i = 0; i < borrowersRegister.length; i++) {
 			address borrower = borrowersRegister[i];
@@ -173,5 +191,13 @@ contract AndinLend {
 			}
 		}
 		return (pendingLoans, borrowersRegister);
+	}
+
+	modifier isERC20AddedModifier() {
+		require(
+			isERC20Added == true,
+			"USDT contract address is not added by the owner, yet."
+		);
+		_;
 	}
 }

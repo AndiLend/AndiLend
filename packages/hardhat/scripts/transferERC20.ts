@@ -7,7 +7,7 @@ async function transferToken(amountToTransfer: number = 1) {
   const amount = ethers.parseUnits(amountToTransfer.toString(), 18);
 
   // Obtener el contrato ERC20
-  const tokenAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Dirección del contrato ERC20
+  const tokenAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"; // Dirección del contrato ERC20
   const Token = await ethers.getContractAt("USDTMock", tokenAddress);
   const balanceSender = await Token.balanceOf(sender);
   console.log("sender balance", balanceSender);
