@@ -11,10 +11,10 @@ const About = () => {
         </div>
       </div>
       <div className="bg-error"></div>
-      <div className="flex items-center gap-20 justify-center">
+      <div className="flex items-center gap-20 justify-center w-3/4">
         <div className="flex flex-col items-center w-1/4">
           <Image src={"/assets/home/handLP.png"} alt={"hand"} width={200} height={200} />
-          <p className="text-black text-center">We protect your information and it is safe from scammers.</p>
+          {/* <p className="text-black text-center">We protect your information and it is safe from scammers.</p> */}
         </div>
         <div className="flex flex-col items-center w-1/4">
           <Image src={"/assets/home/secure.png"} alt={"hand"} width={250} height={250} />
@@ -22,7 +22,7 @@ const About = () => {
         </div>
         <div className="flex flex-col items-center w-1/4">
           <Image src={"/assets/home/timeLP.png"} alt={"hand"} width={230} height={230} />
-          <p className="text-black text-center">We protect your information and it is safe from scammers.</p>
+          {/* <p className="text-black text-center">We protect your information and it is safe from scammers.</p> */}
         </div>
       </div>
     </div>
