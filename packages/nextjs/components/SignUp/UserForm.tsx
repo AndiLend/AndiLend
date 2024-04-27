@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import circuit from "../../../zk_credit_score/target/zk_credit_score.json";
 import { BarretenbergBackend } from "@noir-lang/backend_barretenberg";
 import { Noir } from "@noir-lang/noir_js";
+import { Buffer } from "buffer";
 import { Address } from "viem";
 import { useAccount, useConfig } from "wagmi";
 import { useScaffoldWriteContract } from "~~/hooks/scaffold-eth";
@@ -44,13 +45,18 @@ const UserForm = () => {
     const input = {
       x: creditScore,
     };
-    const proof = await noir.generateProof(input);
+    const proofData = await noir.generateFinalProof(input);
+    console.log({ proofData });
+    const qualification = creditScore <= 300 ? 0 : creditScore <= 700 ? 1 : 2;
+    const hexQualification = "0x" + qualification.toString(16).padStart(64, "0");
+    // proof = "0x" + ethereumjs.Buffer.Buffer.from(proof.proof).toString("hex");
+    const proof = "0x" + Buffer.from(proofData.proof).toString("hex");
     console.log({ proof });
-    const hexCreditScore = "0x" + creditScore.toString(16).padStart(64, "0");
+    console.log([hexQualification]);
     await writeContractAsync(
       {
         functionName: "sendProof",
-        args: [proof, [hexCreditScore]],
+        args: [proof, [hexQualification]],
         account: address,
       } as never,
       {

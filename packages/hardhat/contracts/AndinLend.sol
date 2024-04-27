@@ -58,9 +58,7 @@ contract AndinLend {
 		uint _amount,
 		uint _loanTime,
 		uint8 _interest,
-		uint8 _pendingFeesCount,
-		uint8 _creditScore,
-		bytes memory _proof
+		uint8 _pendingFeesCount
 	) external isERC20AddedModifier {
 		require(
 			loans[msg.sender].loanTime == 0 || loans[msg.sender].status == 2,

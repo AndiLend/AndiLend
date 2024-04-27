@@ -641,16 +641,6 @@ const deployedContracts = {
               name: "_pendingFeesCount",
               type: "uint8",
             },
-            {
-              internalType: "uint8",
-              name: "_creditScore",
-              type: "uint8",
-            },
-            {
-              internalType: "bytes",
-              name: "_proof",
-              type: "bytes",
-            },
           ],
           name: "requestLoan",
           outputs: [],
