@@ -1,6 +1,8 @@
 import { useAccount } from "wagmi";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
+type IScore = 0 | 1 | 2;
+
 const useQuests = () => {
   const result = useAccount();
   const address = result.address as "0x{string}";
@@ -10,7 +12,8 @@ const useQuests = () => {
     args: [address],
   });
   console.log("qualification: ", qualification);
-  return { scoreData: qualification ? qualification * 500 : 0 };
+  const scoreData = qualification as IScore;
+  return { scoreData };
 };
 
 export default useQuests;
