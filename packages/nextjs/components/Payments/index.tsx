@@ -20,7 +20,7 @@ type Loan = {
 };
 
 const contractName = "AndinLend";
-const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: Address | undefined }) => {
+const LoanTable = ({ loan, lender }: { loan: Loan | undefined; lender: string | undefined }) => {
   const { address, chainId } = useAccount();
   const config = useConfig();
   const { writeContractAsync, isPending } = useScaffoldWriteContract(contractName, {
