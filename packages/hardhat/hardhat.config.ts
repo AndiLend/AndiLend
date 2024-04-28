@@ -18,6 +18,8 @@ const deployerPrivateKey =
   process.env.DEPLOYER_PRIVATE_KEY ?? "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
 // If not set, it uses ours Etherscan default API key.
 const etherscanApiKey = process.env.ETHERSCAN_API_KEY || "DNXJA8RX2Q3VZ4URQIWP7Z68CJXQZSC6AW";
+const etherscanArbitrumApiKey = process.env.ETHERSCAN_ARBITRUM_API_KEY || "DNXJA8RX2Q3VZ4URQIWP7Z68CJXQZSC6AW";
+const etherscanScrollApiKey = process.env.ETHERSCAN_SCROLL_API_KEY || "DNXJA8RX2Q3VZ4URQIWP7Z68CJXQZSC6AW";
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -122,8 +124,10 @@ const config: HardhatUserConfig = {
   // configuration for harhdat-verify plugin
   etherscan: {
     apiKey: {
-      arbitrumSepolia: `${etherscanApiKey}`,
-      arbitrum: `${etherscanApiKey}`,
+      arbitrumSepolia: `${etherscanArbitrumApiKey}`,
+      arbitrum: `${etherscanArbitrumApiKey}`,
+      scrollSepolia: `${etherscanScrollApiKey}`,
+      scroll: `${etherscanScrollApiKey}`,
     },
     customChains: [
       {
@@ -132,6 +136,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api-sepolia.arbiscan.io/api",
           browserURL: "https://sepolia.arbiscan.io/",
+        },
+      },
+      {
+        network: "scrollSepolia",
+        chainId: 534351,
+        urls: {
+          apiURL: "https://api-sepolia.scrollscan.com/api",
+          browserURL: "https://sepolia.scrollscan.com/",
         },
       },
     ],

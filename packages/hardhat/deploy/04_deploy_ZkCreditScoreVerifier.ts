@@ -24,7 +24,8 @@ const deployZkCreditScoreVerifier: DeployFunction = async function (hre: Hardhat
 
   await deploy("ZkCreditScoreVerifier", {
     from: deployer,
-    args: ["0xd0fB3F0440eef72547fB0cfd4082D248ab8dc86f", "0xaD71DC80911e819796C1Fe1dd846c50B53F857D8"],
+    // UltraVerifier Address, AndinLend Address
+    args: ["0x4A4c2f325Ce2ab401810D915F0C68144504761aF", "0xbAaB3c080B0C2000025a7d66040D291ACC3bb377"],
     log: true,
     autoMine: true,
   });

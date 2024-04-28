@@ -2181,16 +2181,10 @@ const deployedContracts = {
   },
   534351: {
     AndinLend: {
-      address: "0xd0fB3F0440eef72547fB0cfd4082D248ab8dc86f",
+      address: "0xbAaB3c080B0C2000025a7d66040D291ACC3bb377",
       abi: [
         {
-          inputs: [
-            {
-              internalType: "address",
-              name: "_erc20USDTAddress",
-              type: "address",
-            },
-          ],
+          inputs: [],
           stateMutability: "nonpayable",
           type: "constructor",
         },
@@ -2238,7 +2232,7 @@ const deployedContracts = {
                 },
                 {
                   internalType: "uint8",
-                  name: "creditScore",
+                  name: "qualification",
                   type: "uint8",
                 },
                 {
@@ -2250,11 +2244,6 @@ const deployedContracts = {
                   internalType: "uint8",
                   name: "status",
                   type: "uint8",
-                },
-                {
-                  internalType: "bytes",
-                  name: "proof",
-                  type: "bytes",
                 },
               ],
               indexed: false,
@@ -2310,7 +2299,7 @@ const deployedContracts = {
                 },
                 {
                   internalType: "uint8",
-                  name: "creditScore",
+                  name: "qualification",
                   type: "uint8",
                 },
                 {
@@ -2322,11 +2311,6 @@ const deployedContracts = {
                   internalType: "uint8",
                   name: "status",
                   type: "uint8",
-                },
-                {
-                  internalType: "bytes",
-                  name: "proof",
-                  type: "bytes",
                 },
               ],
               indexed: false,
@@ -2382,7 +2366,7 @@ const deployedContracts = {
                 },
                 {
                   internalType: "uint8",
-                  name: "creditScore",
+                  name: "qualification",
                   type: "uint8",
                 },
                 {
@@ -2394,11 +2378,6 @@ const deployedContracts = {
                   internalType: "uint8",
                   name: "status",
                   type: "uint8",
-                },
-                {
-                  internalType: "bytes",
-                  name: "proof",
-                  type: "bytes",
                 },
               ],
               indexed: false,
@@ -2448,7 +2427,7 @@ const deployedContracts = {
                 },
                 {
                   internalType: "uint8",
-                  name: "creditScore",
+                  name: "qualification",
                   type: "uint8",
                 },
                 {
@@ -2461,11 +2440,6 @@ const deployedContracts = {
                   name: "status",
                   type: "uint8",
                 },
-                {
-                  internalType: "bytes",
-                  name: "proof",
-                  type: "bytes",
-                },
               ],
               indexed: false,
               internalType: "struct AndinLend.Loan",
@@ -2475,6 +2449,56 @@ const deployedContracts = {
           ],
           name: "RequestedLoan",
           type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_borrower",
+              type: "address",
+            },
+            {
+              internalType: "uint8",
+              name: "_qualification",
+              type: "uint8",
+            },
+          ],
+          name: "addBorrowerQualification",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          name: "borrowerQualification",
+          outputs: [
+            {
+              internalType: "uint8",
+              name: "",
+              type: "uint8",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "erc20USDTAddress",
+          outputs: [
+            {
+              internalType: "address",
+              name: "",
+              type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
         },
         {
           inputs: [],
@@ -2509,7 +2533,7 @@ const deployedContracts = {
                 },
                 {
                   internalType: "uint8",
-                  name: "creditScore",
+                  name: "qualification",
                   type: "uint8",
                 },
                 {
@@ -2522,10 +2546,65 @@ const deployedContracts = {
                   name: "status",
                   type: "uint8",
                 },
+              ],
+              internalType: "struct AndinLend.Loan[]",
+              name: "",
+              type: "tuple[]",
+            },
+            {
+              internalType: "address[]",
+              name: "",
+              type: "address[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "getAllPendingLoans",
+          outputs: [
+            {
+              components: [
                 {
-                  internalType: "bytes",
-                  name: "proof",
-                  type: "bytes",
+                  internalType: "uint256",
+                  name: "amount",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "balanceDue",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "loanTime",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "fee",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint8",
+                  name: "interest",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "qualification",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "pendingFeesCount",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint8",
+                  name: "status",
+                  type: "uint8",
                 },
               ],
               internalType: "struct AndinLend.Loan[]",
@@ -2599,7 +2678,7 @@ const deployedContracts = {
                 },
                 {
                   internalType: "uint8",
-                  name: "creditScore",
+                  name: "qualification",
                   type: "uint8",
                 },
                 {
@@ -2611,11 +2690,6 @@ const deployedContracts = {
                   internalType: "uint8",
                   name: "status",
                   type: "uint8",
-                },
-                {
-                  internalType: "bytes",
-                  name: "proof",
-                  type: "bytes",
                 },
               ],
               internalType: "struct AndinLend.Loan[]",
@@ -2676,7 +2750,7 @@ const deployedContracts = {
             },
             {
               internalType: "uint8",
-              name: "creditScore",
+              name: "qualification",
               type: "uint8",
             },
             {
@@ -2689,10 +2763,18 @@ const deployedContracts = {
               name: "status",
               type: "uint8",
             },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [],
+          name: "owner",
+          outputs: [
             {
-              internalType: "bytes",
-              name: "proof",
-              type: "bytes",
+              internalType: "address",
+              name: "",
+              type: "address",
             },
           ],
           stateMutability: "view",
@@ -2733,18 +2815,21 @@ const deployedContracts = {
               name: "_pendingFeesCount",
               type: "uint8",
             },
-            {
-              internalType: "uint8",
-              name: "_creditScore",
-              type: "uint8",
-            },
-            {
-              internalType: "bytes",
-              name: "_proof",
-              type: "bytes",
-            },
           ],
           name: "requestLoan",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "_erc20USDTAddress",
+              type: "address",
+            },
+          ],
+          name: "setERC20ContractAddress",
           outputs: [],
           stateMutability: "nonpayable",
           type: "function",
@@ -3050,6 +3135,130 @@ const deployedContracts = {
         transfer: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
         transferFrom: "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       },
+    },
+    UltraVerifier: {
+      address: "0x4A4c2f325Ce2ab401810D915F0C68144504761aF",
+      abi: [
+        {
+          inputs: [],
+          name: "EC_SCALAR_MUL_FAILURE",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "MOD_EXP_FAILURE",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "PROOF_FAILURE",
+          type: "error",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "expected",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "actual",
+              type: "uint256",
+            },
+          ],
+          name: "PUBLIC_INPUT_COUNT_INVALID",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "PUBLIC_INPUT_GE_P",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "PUBLIC_INPUT_INVALID_BN128_G1_POINT",
+          type: "error",
+        },
+        {
+          inputs: [],
+          name: "getVerificationKeyHash",
+          outputs: [
+            {
+              internalType: "bytes32",
+              name: "",
+              type: "bytes32",
+            },
+          ],
+          stateMutability: "pure",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes",
+              name: "_proof",
+              type: "bytes",
+            },
+            {
+              internalType: "bytes32[]",
+              name: "_publicInputs",
+              type: "bytes32[]",
+            },
+          ],
+          name: "verify",
+          outputs: [
+            {
+              internalType: "bool",
+              name: "",
+              type: "bool",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+    ZkCreditScoreVerifier: {
+      address: "0xEAbc8ceD22FCdb8EE6CA42256cc18a0e23a9c76e",
+      abi: [
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "ultraVerifierAddress",
+              type: "address",
+            },
+            {
+              internalType: "address",
+              name: "andinLendAddress",
+              type: "address",
+            },
+          ],
+          stateMutability: "nonpayable",
+          type: "constructor",
+        },
+        {
+          inputs: [
+            {
+              internalType: "bytes",
+              name: "_proof",
+              type: "bytes",
+            },
+            {
+              internalType: "bytes32[]",
+              name: "_publicInputs",
+              type: "bytes32[]",
+            },
+          ],
+          name: "sendProof",
+          outputs: [],
+          stateMutability: "nonpayable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
     },
   },
 } as const;
