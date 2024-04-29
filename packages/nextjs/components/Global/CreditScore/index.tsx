@@ -7,10 +7,10 @@ interface ICreditScore {
 const scoreTexts = {
   0: {
     text: "Low Score",
-    score: 100,
+    score: 0,
   },
   1: {
-    text: "",
+    text: "Medium Score",
     score: 50,
   },
   2: {
@@ -19,7 +19,7 @@ const scoreTexts = {
   },
 };
 const CreditScore = ({ scoreData }: ICreditScore) => {
-  const textScore = scoreTexts[scoreData];
+  const textScore = scoreData !== undefined ? scoreTexts[scoreData] : scoreTexts[2];
 
   return (
     <div className="p-8 shadow-lg h-full">
@@ -27,7 +27,7 @@ const CreditScore = ({ scoreData }: ICreditScore) => {
       <div className="max-w-xs mx-auto gap-4 flex">
         <div className="text-center">
           <div className="h-22 w-22">
-            <Score title={textScore.text} value={textScore.score} />
+            <Score title={textScore?.text} value={textScore?.score} />
           </div>
           <p className="text-sm text-gray-600 mt-4">
             The score goes from 1 to 100, the closer to 100, the better financing opportunities you will have.

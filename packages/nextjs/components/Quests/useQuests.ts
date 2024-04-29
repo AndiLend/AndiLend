@@ -11,7 +11,6 @@ const useQuests = () => {
     functionName: "borrowerQualification",
     args: [address],
   });
-  console.log("qualification: ", qualification);
   const scoreData = qualification as IScore;
   return { scoreData };
 };

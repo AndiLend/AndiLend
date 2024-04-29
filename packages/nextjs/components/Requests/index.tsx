@@ -144,7 +144,7 @@ const Requests = () => {
   return (
     <div className="p-4 h-full flex flex-col">
       <HeaderPage
-        title="Welcome, Juan!"
+        title="Welcomen!"
         description="You can see the request for funding, one of the variables to evaluate is the score"
       />
       <div className="flex h-full gap-4 pt-4">
